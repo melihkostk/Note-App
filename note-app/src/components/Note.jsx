@@ -66,7 +66,7 @@ export function Note(props) {
                     <img className="h-5 w-5 cursor-pointer" src={personIcon} alt="" />
                 </div>
                 <div>
-                    <label for="fileInput">
+                    <label htmlFor="fileInput">
                         <img className="h-5 w-5 cursor-pointer" src={imageIcon} />
                     </label>
                     <input id="fileInput" type="file" className="hidden" />
