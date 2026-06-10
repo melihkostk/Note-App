@@ -46,7 +46,7 @@ export function Header({ setFlexDir , setSidebarShown }) {
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)] ' href="">Ayarlar</a>
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Koyu temayı devre dışı bırak</a>
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Geri Bildirim Gönder</a>
-                            <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Yardım</a>
+                            <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="https://support.google.com/keep/#topic=6262468" target='_blank'>Yardım</a>
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Uygulama indirme işlemleri</a>
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Klavye kısayolları</a>
                         </div>}

@@ -5,14 +5,17 @@ import imageIcon from "../assets/image.png"
 import archIcon from "../assets/arch.png"
 import moreIcon from "../assets/more.png"
 import checkIcon from "../assets/check.png"
+import colorIcon from "../assets/reset-color.png"
 import React from "react"
 
-export function Note(props){
+export function Note(props) {
 
-    const [isShown,setIsShown] = React.useState(false)
+    const [isShown, setIsShown] = React.useState(false)
+    const [colorShown,setColorShown] = React.useState("false")
+    const [noteColor,setNoteColor] = React.useState("")
 
-    return(
-        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl mt-6 max-w-60 min-w-60 relative">
+    return (
+        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl mt-6 max-w-60 min-w-60 relative" style={{ backgroundColor: noteColor }}>
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className="bg-white rounded-full" src={checkIcon} alt="" />
             </div>
@@ -26,13 +29,41 @@ export function Note(props){
                     {props.note}
                 </p>
             </div>
+            {colorShown && <div className="flex items-center flex-wrap absolute -bottom-15 -left-1/2 w-max bg-[#202124] rounded-[10px] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] px-2.25 py-2 ">
+                <div className="cursor-pointer" onClick={()=>setNoteColor("")}>
+                    <img src={colorIcon} alt="" />
+                </div>
+                <div onClick={()=>setNoteColor("#77172e")} className="bg-[#77172e] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#692b17")} className="bg-[#692b17] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#7c4a03")} className="bg-[#7c4a03] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#264d3b")} className="bg-[#264d3b] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#0c625d")} className="bg-[#0c625d] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#256377")} className="bg-[#256377] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#284255")} className="bg-[#284255] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#472e5b")} className="bg-[#472e5b] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#6c394f")} className="bg-[#6c394f] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#4b443a")} className="bg-[#4b443a] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+                <div onClick={()=>setNoteColor("#232427")} className="bg-[#232427] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
+            </div>}
             <div className={`flex ${isShown ? "visible" : "invisible"} items-start justify-between px-4 py-3 `}>
-                <img className="h-5 w-5 cursor-pointer" src={paletteIcon} alt="" />
-                <img className="h-5 w-5 cursor-pointer" src={alertIcon} alt="" />
-                <img className="h-5 w-5 cursor-pointer" src={personIcon} alt="" />
-                <img className="h-5 w-5 cursor-pointer" src={imageIcon} alt="" />
-                <img className="h-5 w-5 cursor-pointer" src={archIcon} alt="" />
-                <img className="h-5 w-5 cursor-pointer" src={moreIcon} alt="" />
+                <div>
+                    <img onClick={()=>setColorShown(prev=>!prev)} className="h-5 w-5 cursor-pointer" src={paletteIcon} alt="" />
+                </div>
+                <div>
+                    <img className="h-5 w-5 cursor-pointer" src={alertIcon} alt="" />
+                </div>
+                <div>
+                    <img className="h-5 w-5 cursor-pointer" src={personIcon} alt="" />
+                </div>
+                <div>
+                    <img className="h-5 w-5 cursor-pointer" src={imageIcon} alt="" />
+                </div>
+                <div>
+                    <img className="h-5 w-5 cursor-pointer" src={archIcon} alt="" />
+                </div>
+                <div>
+                    <img className="h-5 w-5 cursor-pointer" src={moreIcon} alt="" />
+                </div>
             </div>
         </div>
     )
