@@ -15,7 +15,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content() {
+export function Content({ flexDir }) {
 
     const [isShown, setIsShown] = React.useState(false);
 
@@ -91,7 +91,7 @@ export function Content() {
                     </div>
                 </div>
             </div>}
-            <div className='flex flex-wrap justify-start gap-3 '>
+            <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3`}>
                 {notes.map((n, index) => (
                     <Note key={index} title={n.title} note={n.content} />
                 ))}

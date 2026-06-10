@@ -15,7 +15,7 @@ import photosIcon from '../assets/google-photos.png'
 import meetIcon from '../assets/meet.png'
 
 
-export function Header() {
+export function Header({ setFlexDir }) {
 
     const [showSettings, setShowSettings] = React.useState(false);
     const [showApps, setShowApps] = React.useState(false);
@@ -37,7 +37,9 @@ export function Header() {
                 </div>
                 <div className='flex items-center gap-0.5'>
                     <img onClick={() => location.reload()} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={refreshIcon} alt="refresh icon" />
-                    <img className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={listIcon} alt="list icon" />
+                    <div>
+                        <img onClick={() => setFlexDir(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={listIcon} alt="list icon" />
+                    </div>
                     <div className='relative'>
                         <img onClick={() => setShowSettings(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={settingsIcon} alt="settings icon" />
                         {showSettings && <div className='flex flex-col text-white bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] absolute w-[208.5px] right-0 py-1.5'>

@@ -6,15 +6,15 @@ import React from 'react'
 
 function App() {
 
-  const [flexDir, setFlexDir] = React.useState("row")
+  const [flexDir, setFlexDir] = React.useState(true)
 
   return (
     <>
-      <Header />
+      <Header setFlexDir={setFlexDir} />
       <div className='flex'>
         <Sidebar />
         <div className='w-full flex flex-col items-start'>
-          <Content />
+          <Content flexDir={flexDir} />
         </div>
       </div>
     </>
