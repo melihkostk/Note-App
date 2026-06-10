@@ -29,7 +29,7 @@ export function Content() {
 
     function addNote() {
         if (!title.trim() || !content.trim()) {
-            window.alert("İçerik boş bırakılamaz")
+            setIsShown(false)
             return
         }
         else {
@@ -55,7 +55,6 @@ export function Content() {
             setNotes(JSON.parse(saved))
         }
     }, [])
-
 
     return (
         <div className="flex flex-col items-center w-full">
