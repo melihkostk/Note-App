@@ -4,10 +4,10 @@ import editIcon from '../assets/edit.png'
 import archiveIcon from '../assets/archive.png'
 import deleteIcon from '../assets/delete.png'
 
-export function Sidebar() {
+export function Sidebar({ sidebarShown }) {
 
     return (
-        <div className='grow shrink-0 basis-auto pt-2 w-70'>
+        sidebarShown && (<div className='grow shrink-0 basis-auto pt-2 w-70'>
             <div className='text-[#E8EAED] flex $ items-center text-sm font-semibold rounded-r-full p-3 hover:bg-[#282A2C]'>
                 <img className='px-3' src={bulbIcon} alt="Bulb Icon" />
                 <div className='ml-5'>Notlar</div>
@@ -28,6 +28,6 @@ export function Sidebar() {
                 <img className='px-3' src={deleteIcon} alt="Archive Icon" />
                 <div className='ml-5'>Çöp Kutusu</div>
             </div>
-        </div>
+        </div>)
     )
 }

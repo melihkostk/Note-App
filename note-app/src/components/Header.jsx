@@ -15,7 +15,7 @@ import photosIcon from '../assets/google-photos.png'
 import meetIcon from '../assets/meet.png'
 
 
-export function Header({ setFlexDir }) {
+export function Header({ setFlexDir , setSidebarShown }) {
 
     const [showSettings, setShowSettings] = React.useState(false);
     const [showApps, setShowApps] = React.useState(false);
@@ -24,7 +24,7 @@ export function Header({ setFlexDir }) {
         <header className="p-2 border-b border-[#5f6368]">
             <div className='flex items-center justify-between'>
                 <div className="flex items-center gap-2 cursor-pointer">
-                    <img className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
+                    <img onClick={()=> setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
                     <img className='w-10 h-10' src="https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web-48dp/logo_keep_2026_color_1x_web_48dp.png" alt="" />
                     <span className="text-[22px] text-[#E3E3E3]">Keep</span>
                 </div>
