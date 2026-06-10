@@ -42,7 +42,7 @@ export function Header({ setFlexDir , setSidebarShown }) {
                     </div>
                     <div className='relative'>
                         <img onClick={() => setShowSettings(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={settingsIcon} alt="settings icon" />
-                        {showSettings && <div className='flex flex-col text-white bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] absolute w-[208.5px] right-0 py-1.5'>
+                        {showSettings && <div className='flex flex-col text-white bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] absolute w-[208.5px] right-0 py-1.5 z-10'>
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)] ' href="">Ayarlar</a>
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Koyu temayı devre dışı bırak</a>
                             <a className='py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Geri Bildirim Gönder</a>
@@ -53,7 +53,7 @@ export function Header({ setFlexDir , setSidebarShown }) {
                     </div>
                     <div className='relative'>
                         <img onClick={()=>setShowApps(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={appIcon} alt="apps icon" />
-                        {showApps && <div className='grid grid-cols-3 absolute gap-x-3 gap-y-5 w-70 right-0 bg-[#1b1b1b] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] p-3 rounded-xl'>
+                        {showApps && <div className='grid grid-cols-3 absolute gap-x-3 gap-y-5 w-70 right-0 bg-[#1b1b1b] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] p-3 rounded-xl z-10'>
                             <div className='flex flex-col items-center text-white gap-1 cursor-pointer'>
                                 <img className='w-13.25 h-13.25' src={meetIcon} alt="" />
                                 <a target='_blank' href='https://meet.google.com/landing?pli=1' className='text-sm font-semibold hover:underline'>Meet</a>
