@@ -10,6 +10,10 @@ import redoIcon from "../assets/redo.png"
 import customIcon from "../assets/custom.png"
 import checkBox from "../assets/check-box.png"
 import brushIcon from "../assets/brush.png"
+import boldIcon from "../assets/bold.png"
+import italicIcon from "../assets/italic.png"
+import underlineIcon from "../assets/underline.png"
+import cleanIcon from "../assets/format-clean.png"
 
 import { Note } from "./Note.jsx"
 
@@ -22,6 +26,8 @@ export function Content({ flexDir }) {
     function openNoteMenu() {
         setIsShown(true)
     }
+
+    const [formatShown,setFormatShown] = React.useState(false)
 
     const [notes, setNotes] = React.useState([])
     const [title, setTitle] = React.useState("")
@@ -74,9 +80,15 @@ export function Content({ flexDir }) {
                 <div className="px-4 py-3">
                     <input value={content} onChange={(e) => setContent(e.target.value)} className="placeholder-white text-white placeholder:text-[16px] w-full focus:outline-none" type="text" placeholder="Not alın..." name="not" id="note" />
                 </div>
+                {formatShown && <div className="flex items-center px-0.5 shadow-[0_1px_3px_1px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] mx-2 w-max">
+                    <img className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={boldIcon} alt="" />
+                    <img className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={italicIcon} alt="" />
+                    <img className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={underlineIcon} alt="" />
+                    <img className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={cleanIcon} alt="" />
+                </div>}
                 <div className="flex items-center justify-between my-1">
                     <div className="flex items-center">
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={customIcon} alt="" />
+                        <img onClick={()=>setFormatShown(prev => !prev)} className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={customIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={paletteIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={alertIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={personIcon} alt="" />
