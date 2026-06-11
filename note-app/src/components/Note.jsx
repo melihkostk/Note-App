@@ -28,20 +28,18 @@ export function Note(props) {
 
     return (
 
-        <div onClick={() => setEditShown(prev => !prev)} onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative cursor-pointer" style={{ backgroundColor: noteColor }}>
+        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative" style={{ backgroundColor: noteColor }}>
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className="bg-white rounded-full" src={checkIcon} alt="" />
             </div>
-            <div className={`${editShown ? "flex" : "hidden"} flex-col fixed left-[30%] top-10 border rounded-lg bg-[#202124] z-20 border-[#5f6368] w-150`}>
-                <div className="pt-4 px-4 text-xl font-semibold">
-                    <h1 className="wrap-break-word">
-                        {props.title}
-                    </h1>
+            <div onClick={(e) => e.stopPropagation()} className={`${editShown ? "flex" : "hidden"} flex-col fixed left-[30%] top-10 border rounded-lg bg-[#202124] z-20 border-[#5f6368] w-150`}>
+                <div className="pt-4 px-4 text-xl font-semibold w-full">
+                    <input className="focus:outline-none w-full" type="text" />
                 </div>
                 <div className="px-4 py-3 text-wrap">
-                    <p className={`wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.isH1 ? "text-xl" : ""} ${props.isH2 ? "text-lg" : ""} `}>
-                        {props.note}
-                    </p>
+                    <div className={`wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.isH1 ? "text-xl" : ""} ${props.isH2 ? "text-lg" : ""} `}>
+                        <input className="focus:outline-none w-full" type="text" />
+                    </div>
                 </div>
                 <div className="self-end px-2.5 text-[12px] font-semibold text-[#FFFFFFCC]">
                     Son Düzenleme: 12:25
@@ -58,12 +56,15 @@ export function Note(props) {
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={undoIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={redoIcon} alt="" />
                     </div>
-                    <div className="px-6 py-2 mr-3.75 text-white cursor-pointer hover:font-semibold">
+                    <div onClick={()=>setEditShown(false)} className="px-6 py-2 mr-3.75 text-white cursor-pointer hover:font-semibold">
                         Kapat
                     </div>
                 </div>
             </div>
-            <div className="pt-4 px-4 text-xl font-semibold">
+            {props.img && <div>
+                <img src={props.img} alt="preview" />
+            </div>}
+            <div onClick={()=>setEditShown(prev => !prev)} className="pt-4 px-4 text-xl font-semibold cursor-pointer">
                 <h1 className="wrap-break-word">
                     {props.title}
                 </h1>
@@ -100,7 +101,10 @@ export function Note(props) {
             </div>}
             <div className={`flex ${isShown ? "visible" : "invisible"} items-start justify-between px-4 py-3 `}>
                 <div>
-                    <img onClick={() => setColorShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={paletteIcon} alt="" />
+                    <img 
+                    onClick={() => setColorShown(prev => !prev)} 
+                    
+                    className="h-5 w-5 cursor-pointer" src={paletteIcon} alt="" />
                 </div>
                 <div>
                     <img className="h-5 w-5 cursor-pointer" src={alertIcon} alt="" />

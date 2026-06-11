@@ -22,7 +22,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({ flexDir, setNotes, notes }) {
+export function Content({ flexDir, setNotes, notes ,img , setImg }) {
 
     const [isShown, setIsShown] = React.useState(false);
 
@@ -48,13 +48,14 @@ export function Content({ flexDir, setNotes, notes }) {
         else {
             const newNote = {
                 id: crypto.randomUUID(),
+                img: img,
                 title: title,
                 content: content,
-                isBold:isBold, 
-                isItalic:isItalic,
-                hasUnderline:hasUnderline,
-                isH1:isH1,
-                isH2:isH2,
+                isBold: isBold,
+                isItalic: isItalic,
+                hasUnderline: hasUnderline,
+                isH1: isH1,
+                isH2: isH2,
             }
 
             setNotes([...notes, newNote])
@@ -140,7 +141,17 @@ export function Content({ flexDir, setNotes, notes }) {
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={paletteIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={alertIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={personIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={imageIcon} alt="" />
+                        <label className="mx-2" htmlFor="fileInput">
+                            <img className="h-5 w-5 cursor-pointer" src={imageIcon} />
+                        </label>
+                        <input
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                setImg(URL.createObjectURL(file));
+                            }}
+                            id="fileInput" type="file"
+                            className="hidden"
+                        />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={archIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={moreIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={undoIcon} alt="" />
@@ -158,11 +169,14 @@ export function Content({ flexDir, setNotes, notes }) {
                         id={n.id}
                         title={n.title}
                         note={n.content}
+                        img={n.img}
                         isBold={n.isBold}
                         isItalic={n.isItalic}
                         hasUnderline={n.hasUnderline}
                         isH1={n.isH1}
                         isH2={n.isH2}
+                        setContent={setContent}
+                        setTitle={setTitle}
                         setNotes={setNotes}
                     />
                 ))}
@@ -170,3 +184,4 @@ export function Content({ flexDir, setNotes, notes }) {
         </div>
     )
 }
+

@@ -15,7 +15,7 @@ import photosIcon from '../assets/google-photos.png'
 import meetIcon from '../assets/meet.png'
 
 
-export function Header({ setFlexDir , setSidebarShown }) {
+export function Header({ setFlexDir, setSidebarShown}) {
 
     const [showSettings, setShowSettings] = React.useState(false);
     const [showApps, setShowApps] = React.useState(false);
@@ -24,7 +24,7 @@ export function Header({ setFlexDir , setSidebarShown }) {
         <header className="p-2 border-b border-[#5f6368]">
             <div className='flex items-center justify-between'>
                 <div className="flex items-center gap-2 cursor-pointer">
-                    <img onClick={()=> setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
+                    <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
                     <img className='w-10 h-10' src="https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web-48dp/logo_keep_2026_color_1x_web_48dp.png" alt="" />
                     <span className="text-[22px] text-[#E3E3E3]">Keep</span>
                 </div>
@@ -52,7 +52,7 @@ export function Header({ setFlexDir , setSidebarShown }) {
                         </div>}
                     </div>
                     <div className='relative'>
-                        <img onClick={()=>setShowApps(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={appIcon} alt="apps icon" />
+                        <img onClick={() => setShowApps(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full' src={appIcon} alt="apps icon" />
                         {showApps && <div className='grid grid-cols-3 absolute gap-x-3 gap-y-5 w-70 right-0 bg-[#1b1b1b] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] p-3 rounded-xl z-10'>
                             <div className='flex flex-col items-center text-white gap-1 cursor-pointer'>
                                 <img className='w-13.25 h-13.25' src={meetIcon} alt="" />
