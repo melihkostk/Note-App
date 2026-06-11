@@ -22,7 +22,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({ flexDir , setNotes , notes}) {
+export function Content({ flexDir, setNotes, notes }) {
 
     const [isShown, setIsShown] = React.useState(false);
 
@@ -36,8 +36,8 @@ export function Content({ flexDir , setNotes , notes}) {
     const [isBold, setIsBold] = React.useState(false)
     const [isItalic, setIsItalic] = React.useState(false)
     const [hasUnderline, setHasUnderline] = React.useState(false)
-    const [isH1 , setIsH1] = React.useState(false)
-    const [isH2 , setIsH2] = React.useState(false)
+    const [isH1, setIsH1] = React.useState(false)
+    const [isH2, setIsH2] = React.useState(false)
 
 
     function addNote() {
@@ -47,9 +47,14 @@ export function Content({ flexDir , setNotes , notes}) {
         }
         else {
             const newNote = {
-                id:crypto.randomUUID(),
+                id: crypto.randomUUID(),
                 title: title,
-                content: content
+                content: content,
+                isBold:isBold, 
+                isItalic:isItalic,
+                hasUnderline:hasUnderline,
+                isH1:isH1,
+                isH2:isH2,
             }
 
             setNotes([...notes, newNote])
@@ -98,11 +103,11 @@ export function Content({ flexDir , setNotes , notes}) {
                         </div>
                         <div>
                             <img
-                                onClick={()=>{
+                                onClick={() => {
                                     setIsH1(false);
                                     setIsH2(false);
                                 }}
-                                className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={normal} alt="" 
+                                className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={normal} alt=""
                             />
                         </div>
                     </div>
@@ -148,17 +153,17 @@ export function Content({ flexDir , setNotes , notes}) {
             </div>}
             <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6`}>
                 {notes.map((n) => (
-                    <Note 
+                    <Note
                         key={n.id}
-                        id={n.id} 
-                        title={n.title} 
-                        note={n.content} 
-                        isBold={isBold} 
-                        isItalic={isItalic}
-                        hasUnderline={hasUnderline}
-                        isH1 = {isH1}
-                        isH2 = {isH2}
-                        setNotes = {setNotes}
+                        id={n.id}
+                        title={n.title}
+                        note={n.content}
+                        isBold={n.isBold}
+                        isItalic={n.isItalic}
+                        hasUnderline={n.hasUnderline}
+                        isH1={n.isH1}
+                        isH2={n.isH2}
+                        setNotes={setNotes}
                     />
                 ))}
             </div>
