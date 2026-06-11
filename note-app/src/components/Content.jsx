@@ -14,6 +14,9 @@ import boldIcon from "../assets/bold.png"
 import italicIcon from "../assets/italic.png"
 import underlineIcon from "../assets/underline.png"
 import cleanIcon from "../assets/format-clean.png"
+import h1 from "../assets/h1.png"
+import h2 from "../assets/h2.png"
+import normal from "../assets/normal.png"
 
 import { Note } from "./Note.jsx"
 
@@ -35,6 +38,8 @@ export function Content({ flexDir }) {
     const [isBold, setIsBold] = React.useState(false)
     const [isItalic, setIsItalic] = React.useState(false)
     const [hasUnderline, setHasUnderline] = React.useState(false)
+    const [isH1 , setIsH1] = React.useState(false)
+    const [isH2 , setIsH2] = React.useState(false)
 
 
     function addNote() {
@@ -82,21 +87,48 @@ export function Content({ flexDir }) {
                     <img className="hover:bg-[rgba(154,160,166,0.157)] rounded-full cursor-pointer" src={keepIcon} alt="" />
                 </div>
                 <div className="px-4 py-3">
-                    <input value={content} onChange={(e) => setContent(e.target.value)} className={`${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${hasUnderline ? "underline" : ""} placeholder-white text-white placeholder:text-[16px] w-full focus:outline-none`} type="text" placeholder="Not alın..." name="not" id="note" />
+                    <input value={content} onChange={(e) => setContent(e.target.value)} className={`${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${hasUnderline ? "underline" : ""} ${isH1 ? "text-xl" : ""} ${isH2 ? "text-lg" : ""} placeholder-white text-white placeholder:text-[16px] w-full focus:outline-none`} type="text" placeholder="Not alın..." name="not" id="note" />
                 </div>
                 {formatShown && <div className="flex items-center px-0.5 shadow-[0_1px_3px_1px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] mx-2 w-max">
-                    <img onClick={() => setIsBold(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={boldIcon} alt="" />
-                    <img onClick={() => setIsItalic(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={italicIcon} alt="" />
-                    <img onClick={() => setHasUnderline(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={underlineIcon} alt="" />
-                    <img
-                        onClick={() => {
-                            setIsBold(false);
-                            setIsItalic(false);
-                            setHasUnderline(false);
-                        }
-                        }
-                        className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={cleanIcon} alt=""
-                    />
+                    <div className="flex border-r border-[#5f6368]">
+                        <div>
+                            <img onClick={() => setIsH1(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={h1} alt="" />
+                        </div>
+                        <div>
+                            <img onClick={() => setIsH2(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={h2} alt="" />
+                        </div>
+                        <div>
+                            <img
+                                onClick={()=>{
+                                    setIsH1(false);
+                                    setIsH2(false);
+                                }}
+                                className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={normal} alt="" 
+                            />
+                        </div>
+                    </div>
+                    <div className="flex">
+                        <div>
+                            <img onClick={() => setIsBold(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={boldIcon} alt="" />
+                        </div>
+                        <div>
+                            <img onClick={() => setIsItalic(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={italicIcon} alt="" />
+                        </div>
+                        <div>
+                            <img onClick={() => setHasUnderline(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={underlineIcon} alt="" />
+                        </div>
+                        <div>
+                            <img
+                                onClick={() => {
+                                    setIsBold(false);
+                                    setIsItalic(false);
+                                    setHasUnderline(false);
+                                }
+                                }
+                                className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={cleanIcon} alt=""
+                            />
+                        </div>
+                    </div>
                 </div>}
                 <div className="flex items-center justify-between my-1">
                     <div className="flex items-center">
