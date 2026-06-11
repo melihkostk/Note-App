@@ -1,6 +1,5 @@
 import paletteIcon from "../assets/palette.png"
 import alertIcon from "../assets/alert.png"
-import personIcon from "../assets/person.png"
 import imageIcon from "../assets/image.png"
 import archIcon from "../assets/arch.png"
 import moreIcon from "../assets/more.png"
@@ -18,6 +17,7 @@ export function Note(props) {
     const [moreShown, setMoreShown] = React.useState(false)
     const [noteColor, setNoteColor] = React.useState("")
     const [editShown, setEditShown] = React.useState(false)
+    const [remainderShown, setRemainderShown] = React.useState(false)
 
     function deleteNote(id) {
         const saved = JSON.parse(localStorage.getItem("notes")) || [];
@@ -49,7 +49,6 @@ export function Note(props) {
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={customIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={paletteIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={alertIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={personIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={imageIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={archIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={moreIcon} alt="" />
@@ -91,21 +90,39 @@ export function Note(props) {
                 <div onClick={() => setNoteColor("#232427")} className="bg-[#232427] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
             </div>}
             {moreShown && <div className="flex flex-col absolute top-full left-48 bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] text-sm py-2 w-[228.8px] z-10">
-                <div onClick={() => deleteNote(props.id)} className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)]">Notu sil</div>
-                <div className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)]">Etiket ekle</div>
+                <div onClick={() => deleteNote(props.id)} className="py-1.25 pl-4.25 pr-2.5 font-semibold cursor-pointer hover:bg-[rgba(255,255,255,0.3)]">Notu sil</div>
+                <div className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)] cursor-pointer">Etiket ekle</div>
+            </div>}
+            {remainderShown && <div className="flex flex-col -bottom-60 absolute z-50 bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)]">
+                <div className="p-3.75">
+                    <h1 className="text-[14px] text-[#E8EAED] font-semibold">Daha sonra anımsat</h1>
+                    <p className="text-[13px] text-[#E8EAED] font-semibold">Hatırlatıcılarınız Google Görevler'e kaydedilir</p>
+                </div>
+                <div className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                    <div>Bugün daha sonra</div>
+                    <div>18:00</div>
+                </div>
+                <div className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                    <div>Yarın</div>
+                    <div>08:00</div>
+                </div>
+                <div className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                    <div>Sonraki hafta</div>
+                    <div>Pzt, 08:00</div>
+                </div>
+                <div className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                    <p>Tarih ve saat seç</p>
+                </div>
             </div>}
             <div className={`flex ${isShown ? "visible" : "invisible"} items-start justify-between px-4 py-3 `}>
                 <div>
                     <img 
-                    onClick={() => setColorShown(prev => !prev)} 
-                    
-                    className="h-5 w-5 cursor-pointer" src={paletteIcon} alt="" />
+                        onClick={() => setColorShown(prev => !prev)} 
+                        className="h-5 w-5 cursor-pointer" src={paletteIcon} alt="" 
+                    />
                 </div>
                 <div>
-                    <img className="h-5 w-5 cursor-pointer" src={alertIcon} alt="" />
-                </div>
-                <div>
-                    <img className="h-5 w-5 cursor-pointer" src={personIcon} alt="" />
+                    <img onClick={() => setRemainderShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={alertIcon} alt="" />
                 </div>
                 <div>
                     <label htmlFor="fileInput">

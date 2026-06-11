@@ -91,7 +91,7 @@ export function Content({ flexDir, setNotes, notes ,img , setImg }) {
             {isShown && <div className="border border-[#5f6368] w-1/2 rounded-xl mt-8">
                 {img && <div className="flex flex-col items-center justify-center">
                     <img className="w-full]" src={img} alt="" />
-                    <img onClick={()=>setImg("")} className="self-end px-4" src={deleteIcon} alt="" />
+                    <img onClick={()=>setImg("")} className="self-end px-4 cursor-pointer" src={deleteIcon} alt="" />
                 </div>}
                 <div className="flex items-center justify-between px-4 pt-4">
                     <input value={title} onChange={(e) => setTitle(e.target.value)} className="placeholder-white font-semibold text-white placeholder:text-[20px] w-full focus:outline-none" type="text" placeholder="Başlık" name="baslık" id="baslık" />
