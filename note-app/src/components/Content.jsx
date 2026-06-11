@@ -17,6 +17,7 @@ import cleanIcon from "../assets/format-clean.png"
 import h1 from "../assets/h1.png"
 import h2 from "../assets/h2.png"
 import normal from "../assets/normal.png"
+import deleteIcon from "../assets/delete.png"
 
 import { Note } from "./Note.jsx"
 
@@ -63,6 +64,7 @@ export function Content({ flexDir, setNotes, notes ,img , setImg }) {
             localStorage.setItem("notes", JSON.stringify(updatedNotes))
             setTitle("")
             setContent("")
+            setImg("")
             setIsShown(false)
         }
 
@@ -87,6 +89,10 @@ export function Content({ flexDir, setNotes, notes ,img , setImg }) {
                 </div>
             </div>}
             {isShown && <div className="border border-[#5f6368] w-1/2 rounded-xl mt-8">
+                {img && <div className="flex flex-col items-center justify-center">
+                    <img className="w-full]" src={img} alt="" />
+                    <img onClick={()=>setImg("")} className="self-end px-4" src={deleteIcon} alt="" />
+                </div>}
                 <div className="flex items-center justify-between px-4 pt-4">
                     <input value={title} onChange={(e) => setTitle(e.target.value)} className="placeholder-white font-semibold text-white placeholder:text-[20px] w-full focus:outline-none" type="text" placeholder="Başlık" name="baslık" id="baslık" />
                     <img className="hover:bg-[rgba(154,160,166,0.157)] rounded-full cursor-pointer" src={keepIcon} alt="" />
