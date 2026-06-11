@@ -15,8 +15,11 @@ export function Note(props) {
     const [moreShown, setMoreShown] = React.useState(false)
     const [noteColor, setNoteColor] = React.useState("")
 
-    function deleteNote(id){
-        props.setNotes(prevItems => prevItems.filter(item => item.id !== id));
+    function deleteNote(id) {
+        const saved = JSON.parse(localStorage.getItem("notes")) || [];
+        const deleted = saved.filter(note => note.id !== id);
+        localStorage.setItem("notes", JSON.stringify(deleted));
+        props.setNotes(deleted);
     }
 
     return (
