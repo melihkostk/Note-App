@@ -8,6 +8,7 @@ function App() {
 
   const [flexDir, setFlexDir] = React.useState(true);
   const [sidebarShown, setSidebarShown] = React.useState(true);
+  const [notes, setNotes] = React.useState([])
 
   return (
     <>
@@ -15,7 +16,7 @@ function App() {
       <div className='flex'>
         <Sidebar sidebarShown={sidebarShown} />
         <div className='w-full flex flex-col items-start'>
-          <Content flexDir={flexDir} />
+          <Content flexDir={flexDir} setNotes={setNotes} notes={notes} />
         </div>
       </div>
     </>

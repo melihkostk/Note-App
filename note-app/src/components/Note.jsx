@@ -15,8 +15,12 @@ export function Note(props) {
     const [moreShown, setMoreShown] = React.useState(false)
     const [noteColor, setNoteColor] = React.useState("")
 
+    function deleteNote(id){
+        props.setNotes(prevItems => prevItems.filter(item => item.id !== id));
+    }
+
     return (
-        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl mt-6 max-w-60 min-w-60 relative cursor-pointer" style={{ backgroundColor: noteColor }}>
+        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative cursor-pointer" style={{ backgroundColor: noteColor }}>
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className="bg-white rounded-full" src={checkIcon} alt="" />
             </div>
@@ -26,7 +30,7 @@ export function Note(props) {
                 </h1>
             </div>
             <div className="px-4 py-3 text-wrap">
-                <p className="wrap-break-word w-full">
+                <p className={`wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.isH1 ? "text-xl" : ""} ${props.isH2 ? "text-lg" : ""} `}>
                     {props.note}
                 </p>
             </div>
@@ -46,8 +50,8 @@ export function Note(props) {
                 <div onClick={() => setNoteColor("#4b443a")} className="bg-[#4b443a] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
                 <div onClick={() => setNoteColor("#232427")} className="bg-[#232427] w-8 h-8 rounded-full hover:border-2 border-white cursor-pointer m-0.5"></div>
             </div>}
-            {moreShown && <div className="flex flex-col absolute top-full left-48 bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] text-sm py-2 w-[228.8px]">
-                <div className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)]">Notu sil</div>
+            {moreShown && <div className="flex flex-col absolute top-full left-48 bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] text-sm py-2 w-[228.8px] z-10">
+                <div onClick={() => deleteNote(props.id)} className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)]">Notu sil</div>
                 <div className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)]">Etiket ekle</div>
                 <div className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)]">Çizim ekle</div>
                 <div className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)]">Kopya oluştur</div>

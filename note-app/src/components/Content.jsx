@@ -22,7 +22,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({ flexDir }) {
+export function Content({ flexDir , setNotes , notes}) {
 
     const [isShown, setIsShown] = React.useState(false);
 
@@ -31,8 +31,6 @@ export function Content({ flexDir }) {
     }
 
     const [formatShown, setFormatShown] = React.useState(false)
-
-    const [notes, setNotes] = React.useState([])
     const [title, setTitle] = React.useState("")
     const [content, setContent] = React.useState("")
     const [isBold, setIsBold] = React.useState(false)
@@ -49,6 +47,7 @@ export function Content({ flexDir }) {
         }
         else {
             const newNote = {
+                id:crypto.randomUUID(),
                 title: title,
                 content: content
             }
@@ -147,9 +146,20 @@ export function Content({ flexDir }) {
                     </div>
                 </div>
             </div>}
-            <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3`}>
-                {notes.map((n, index) => (
-                    <Note key={index} title={n.title} note={n.content} />
+            <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6`}>
+                {notes.map((n) => (
+                    <Note 
+                        key={n.id}
+                        id={n.id} 
+                        title={n.title} 
+                        note={n.content} 
+                        isBold={isBold} 
+                        isItalic={isItalic}
+                        hasUnderline={hasUnderline}
+                        isH1 = {isH1}
+                        isH2 = {isH2}
+                        setNotes = {setNotes}
+                    />
                 ))}
             </div>
         </div>
