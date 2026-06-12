@@ -41,8 +41,8 @@ function App() {
           <Archive archivedNotes={archivedNotes}
           />
         </div>}
-        {trashPage && <div className='w-full flex flex-col items-start'>
-          <Trash deletedNotes={deletedNotes}
+        {trashPage && <div className='w-full flex flex-col items-center mt-8'>
+          <Trash deletedNotes={deletedNotes} setDeletedNotes={setDeletedNotes}
           />
         </div>}
       </div>
