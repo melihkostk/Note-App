@@ -2,8 +2,10 @@ import './App.css'
 import { Content } from './components/Content'
 import { Header } from './components/Header'
 import { Sidebar } from './components/Sidebar'
+/*import { Archive } from './components/Archive'*/
 import closeIcon from './assets/close.png'
 import React from 'react'
+import { Archive } from './components/Archive'
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
   const [archivedNotes, setArchivedNotes] = React.useState([])
   const [img, setImg] = React.useState("")
   const [archiveShown, setArchiveShown] = React.useState(false)
+  const [contentShown, setContentShown] = React.useState(true)
+  const [archivePage, setArchivePage] = React.useState(false)
 
   React.useEffect(() => {
     const timer = setInterval(() => {
@@ -21,16 +25,21 @@ function App() {
 
     return () => clearTimeout(timer);
 
-  }, [archiveShown]); 
-
+  }, [archiveShown]);
+  console.log("archivedNotes:", archivedNotes);
   return (
     <>
       <Header setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
       <div className='flex'>
-        <Sidebar sidebarShown={sidebarShown} />
-        <div className='w-full flex flex-col items-start'>
+        <Sidebar sidebarShown={sidebarShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
+        {contentShown && <div className='w-full flex flex-col items-start'>
           <Content flexDir={flexDir} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
-        </div>
+        </div>}
+        {archivePage && <div className='w-full flex flex-col items-start'>
+          <Archive
+            archivedNotes={archivedNotes}
+          />
+        </div>}
       </div>
       {archiveShown && <div className='flex justify-between items-center bg-[#313235] w-[30%] pl-5 pr-2.5 py-2.5 fixed bottom-5 left-5'>
         <div className='text-white text-sm font-semibold'>
@@ -41,7 +50,7 @@ function App() {
             Geri al
           </div>
           <div>
-            <img className='cursor-pointer' onClick={()=>setArchiveShown(prev => !prev)} src={closeIcon} alt="" />
+            <img className='cursor-pointer' onClick={() => setArchiveShown(prev => !prev)} src={closeIcon} alt="" />
           </div>
         </div>
       </div>}
