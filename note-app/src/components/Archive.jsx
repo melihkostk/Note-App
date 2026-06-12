@@ -1,6 +1,17 @@
 import { Note } from "./Note";
+import React from "react";
 
-export function Archive({ archivedNotes }) {
+export function Archive({ archivedNotes, setArchivedNotes }) {
+    
+    React.useEffect(() => {
+        const archived = localStorage.getItem("deletedNotes")
+
+        if (archived) {
+            setArchivedNotes(JSON.parse(archived))
+        }
+    }, [])
+
+
     return (
         <div className="flex items-start gap-3 w-full mt-8">
             {archivedNotes.map((n) => (
