@@ -32,12 +32,14 @@ export function Note(props) {
     }
 
     function archiveNotes(id){
-       const saved = JSON.parse(localStorage.getItem("notes")) || [];
+        const saved = JSON.parse(localStorage.getItem("notes")) || [];
         const archivedNote = saved.find(note => note.id === id);
         const remaining = saved.filter(note => note.id !== id);
-        const archived = JSON.parse(localStorage.getItem("archived notes")) || [];
+        const archived = JSON.parse(localStorage.getItem("archivedNotes")) || [];
         localStorage.setItem("notes", JSON.stringify(remaining));
         localStorage.setItem("archivedNotes", JSON.stringify([...archived, archivedNote]));
+        props.setNotes(remaining);
+        props.setArchivedNotes([...archived, archivedNote]);
     }
 
     return (

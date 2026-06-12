@@ -23,7 +23,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({ flexDir, setNotes, notes ,img , setImg , setArchiveShown }) {
+export function Content({ flexDir,setArchivedNotes,archivedNotes, setNotes, notes ,img , setImg , setArchiveShown }) {
 
     const [isShown, setIsShown] = React.useState(false);
     const [formatShown, setFormatShown] = React.useState(false)

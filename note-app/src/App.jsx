@@ -10,6 +10,7 @@ function App() {
   const [flexDir, setFlexDir] = React.useState(true);
   const [sidebarShown, setSidebarShown] = React.useState(true);
   const [notes, setNotes] = React.useState([])
+  const [archivedNotes, setArchivedNotes] = React.useState([])
   const [img, setImg] = React.useState("")
   const [archiveShown, setArchiveShown] = React.useState(false)
 
@@ -28,7 +29,7 @@ function App() {
       <div className='flex'>
         <Sidebar sidebarShown={sidebarShown} />
         <div className='w-full flex flex-col items-start'>
-          <Content flexDir={flexDir} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
+          <Content flexDir={flexDir} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
         </div>
       </div>
       {archiveShown && <div className='flex justify-between items-center bg-[#313235] w-[30%] pl-5 pr-2.5 py-2.5 fixed bottom-5 left-5'>
