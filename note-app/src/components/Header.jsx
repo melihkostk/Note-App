@@ -15,7 +15,7 @@ import photosIcon from '../assets/google-photos.png'
 import meetIcon from '../assets/meet.png'
 
 
-export function Header({ setFlexDir, setSidebarShown}) {
+export function Header({ setFlexDir, setSidebarShown ,setSearchInput}) {
 
     const [showSettings, setShowSettings] = React.useState(false);
     const [showApps, setShowApps] = React.useState(false);
@@ -30,6 +30,7 @@ export function Header({ setFlexDir, setSidebarShown}) {
                 </div>
                 <div className='w-6/10'>
                     <input
+                        onChange={(e) => setSearchInput(e.target.value)}
                         className="placeholder-[#e3e3e3] text-white bg-[#282A2C] hover:bg-white hover:text-black hover:placeholder-black py-2.75 px-8 w-3/4 rounded-lg"
                         type="text"
                         placeholder="Arama Yapın"

@@ -19,6 +19,7 @@ function App() {
   const [contentShown, setContentShown] = React.useState(true)
   const [archivePage, setArchivePage] = React.useState(false)
   const [trashPage, setTrashPage] = React.useState(false)
+  const [searchInput, setSearchInput] = React.useState("")
 
   React.useEffect(() => {
     const timer = setInterval(() => {
@@ -31,13 +32,13 @@ function App() {
   
   return (
     <>
-      <Header setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
+      <Header searchInput={searchInput} setSearchInput={setSearchInput} setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
       <div className='flex'>
-        <Sidebar sidebarShown={sidebarShown} setTrashPage={setTrashPage} setArchivePage={setArchivePage} setContentShown={setContentShown} />
+        <Sidebar sidebarShown={sidebarShown} trashPage={trashPage} setTrashPage={setTrashPage} archivePage={archivePage} contentShown={contentShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
         {contentShown && <div className='w-full flex flex-col items-start'>
           <Content flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
         </div>}
-        {archivePage && <div className='w-full flex flex-col items-start'>
+        {archivePage && <div className='w-full flex flex-col items-center'>
           <Archive archivedNotes={archivedNotes} setArchivedNotes={setArchivedNotes}
           />
         </div>}
