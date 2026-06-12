@@ -23,7 +23,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({ flexDir, setNotes, notes ,img , setImg }) {
+export function Content({ flexDir, setNotes, notes ,img , setImg , setArchiveShown }) {
 
     const [isShown, setIsShown] = React.useState(false);
     const [formatShown, setFormatShown] = React.useState(false)
@@ -178,6 +178,7 @@ export function Content({ flexDir, setNotes, notes ,img , setImg }) {
                         setContent={setContent}
                         setTitle={setTitle}
                         setNotes={setNotes}
+                        setArchiveShown={setArchiveShown}
                     />
                 ))}
             </div>

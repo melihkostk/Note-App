@@ -171,7 +171,7 @@ export function Note(props) {
                     <input id="fileInput" type="file" className="hidden" />
                 </div>
                 <div>
-                    <img className="h-5 w-5 cursor-pointer" src={archIcon} alt="" />
+                    <img onClick={()=>props.setArchiveShown(prev=>!prev)} className="h-5 w-5 cursor-pointer" src={archIcon} alt="" />
                 </div>
                 <div>
                     <img onClick={() => setMoreShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={moreIcon} alt="" />
