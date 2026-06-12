@@ -78,11 +78,19 @@ export function Note(props) {
                     {props.note}
                 </p>
             </div>
-            {remainder && <div className="py-1.25 px-2.5">
-                <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full">
-                    {remainder}
-                    {deleteShown && <img onClick={() => setRemainder(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full p" src={closeIcon} alt="" />}
-                </div>
+            {<div className="flex flex-wrap">
+                {remainder && <div className="py-1.25 px-2.5">
+                    <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full relative pr-6">
+                        {remainder}
+                        {deleteShown && <img onClick={() => setRemainder(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full absolute right-0" src={closeIcon} alt="" />}
+                    </div>
+                </div>}
+                {tag && <div className="py-1.25 px-2.5">
+                    <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full relative pr-6">
+                        {tag}
+                        {deleteShown && <img onClick={() => setTag(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full absolute right-0" src={closeIcon} alt="" />}
+                    </div>
+                </div>}
             </div>}
             {colorShown && <div className="flex items-center flex-wrap absolute -bottom-15 -left-1/2 w-max bg-[#202124] rounded-[10px] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] px-2.25 py-2 z-10 ">
                 <div className="cursor-pointer" onClick={() => setNoteColor("")}>
