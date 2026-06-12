@@ -8,6 +8,7 @@ import colorIcon from "../assets/reset-color.png"
 import undoIcon from "../assets/undo.png"
 import redoIcon from "../assets/redo.png"
 import customIcon from "../assets/custom.png"
+import closeIcon from "../assets/close.png"
 import React from "react"
 
 export function Note(props) {
@@ -19,6 +20,7 @@ export function Note(props) {
     const [editShown, setEditShown] = React.useState(false)
     const [remainderMenuShown, setRemainderMenuShown] = React.useState(false)
     const [remainder, setRemainder] = React.useState(null)
+    const [deleteShown, setDeleteShown] = React.useState(false)
 
     function deleteNote(id) {
         const saved = JSON.parse(localStorage.getItem("notes")) || [];
@@ -29,7 +31,7 @@ export function Note(props) {
 
     return (
 
-        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative" style={{ backgroundColor: noteColor }}>
+        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative max-h-max" style={{ backgroundColor: noteColor }}>
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className="bg-white rounded-full" src={checkIcon} alt="" />
             </div>
@@ -75,8 +77,9 @@ export function Note(props) {
                 </p>
             </div>
             {remainder && <div className="py-1.25 px-2.5">
-                <div className="border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full">
-                {remainder}
+                <div onMouseEnter={()=>setDeleteShown(true)} onMouseLeave={()=>setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full">
+                    {remainder}
+                    {deleteShown && <img onClick={() => setRemainder(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full p" src={closeIcon} alt="" />}
                 </div>
             </div>}
             {colorShown && <div className="flex items-center flex-wrap absolute -bottom-15 -left-1/2 w-max bg-[#202124] rounded-[10px] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] px-2.25 py-2 z-10 ">
