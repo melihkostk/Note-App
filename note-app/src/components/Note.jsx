@@ -31,6 +31,15 @@ export function Note(props) {
         props.setNotes(deleted);
     }
 
+    function archiveNotes(id){
+       const saved = JSON.parse(localStorage.getItem("notes")) || [];
+        const archivedNote = saved.find(note => note.id === id);
+        const remaining = saved.filter(note => note.id !== id);
+        const archived = JSON.parse(localStorage.getItem("archived notes")) || [];
+        localStorage.setItem("notes", JSON.stringify(remaining));
+        localStorage.setItem("archivedNotes", JSON.stringify([...archived, archivedNote]));
+    }
+
     return (
 
         <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative max-h-max" style={{ backgroundColor: noteColor }}>
@@ -171,7 +180,15 @@ export function Note(props) {
                     <input id="fileInput" type="file" className="hidden" />
                 </div>
                 <div>
-                    <img onClick={()=>props.setArchiveShown(prev=>!prev)} className="h-5 w-5 cursor-pointer" src={archIcon} alt="" />
+                    <img 
+                    onClick={()=>{
+                        props.setArchiveShown(prev=>!prev)
+                        archiveNotes(props.id)
+                    
+                    }
+                    } 
+                    className="h-5 w-5 cursor-pointer" src={archIcon} alt="" 
+                    />
                 </div>
                 <div>
                     <img onClick={() => setMoreShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={moreIcon} alt="" />
