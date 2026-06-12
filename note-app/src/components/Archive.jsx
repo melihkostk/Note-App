@@ -1,10 +1,11 @@
+import archiveIcon from '../assets/archive.png'
 import { Note } from "./Note";
 import React from "react";
 
 export function Archive({ archivedNotes, setArchivedNotes }) {
-    
+
     React.useEffect(() => {
-        const archived = localStorage.getItem("deletedNotes")
+        const archived = localStorage.getItem("archivedNotes")
 
         if (archived) {
             setArchivedNotes(JSON.parse(archived))
@@ -13,21 +14,27 @@ export function Archive({ archivedNotes, setArchivedNotes }) {
 
 
     return (
-        <div className="flex items-start gap-3 w-full mt-8">
-            {archivedNotes.map((n) => (
-                <Note
-                    key={n.id}
-                    id={n.id}
-                    title={n.title}
-                    note={n.content}
-                    img={n.img}
-                    isBold={n.isBold}
-                    isItalic={n.isItalic}
-                    hasUnderline={n.hasUnderline}
-                    isH1={n.isH1}
-                    isH2={n.isH2}
-                />
-            ))}
-        </div>
+        <>
+            {archivedNotes && archivedNotes.length === 0 && <div className='flex flex-col items-center'>
+                <img className='w-30 h-30 m-5' src={archiveIcon} alt="" />
+                <div className='text-[22px] text-[#9AA0A6]'>Arşivlenen notlarınız burada görünür</div>
+            </div>}
+            <div className="flex items-start gap-3 w-full mt-8">
+                {archivedNotes.map((n) => (
+                    <Note
+                        key={n.id}
+                        id={n.id}
+                        title={n.title}
+                        note={n.content}
+                        img={n.img}
+                        isBold={n.isBold}
+                        isItalic={n.isItalic}
+                        hasUnderline={n.hasUnderline}
+                        isH1={n.isH1}
+                        isH2={n.isH2}
+                    />
+                ))}
+            </div>
+        </>
     )
 }

@@ -1,6 +1,4 @@
 import bulbIcon from '../assets/bulb.png'
-import notificationIcon from '../assets/notification.png'
-import editIcon from '../assets/edit.png'
 import archiveIcon from '../assets/archive.png'
 import deleteIcon from '../assets/delete.png'
 
@@ -17,14 +15,6 @@ export function Sidebar({ sidebarShown, setArchivePage, setContentShown , setTra
                 className='text-[#E8EAED] flex items-center text-sm font-semibold rounded-r-full p-3 hover:bg-[#282A2C] cursor-pointer'>
                 <img className='px-3' src={bulbIcon} alt="Bulb Icon" />
                 <div className='ml-5'>Notlar</div>
-            </div>
-            <div className='text-[#E8EAED] flex items-center text-sm font-semibold p-3 hover:bg-[#282A2C] cursor-pointer rounded-r-full'>
-                <img className='px-3' src={notificationIcon} alt="Notification Icon" />
-                <div className='ml-5'>Hatırlatıcılar</div>
-            </div>
-            <div className='text-[#E8EAED] flex items-center text-sm font-semibold p-3 hover:bg-[#282A2C] cursor-pointer rounded-r-full'>
-                <img className='px-3' src={editIcon} alt="Edit Icon" />
-                <div className='ml-5'>Etiketleri Düzenleyin</div>
             </div>
             <div onClick={() => {
                 setArchivePage(true);
