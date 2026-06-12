@@ -21,6 +21,8 @@ export function Note(props) {
     const [remainderMenuShown, setRemainderMenuShown] = React.useState(false)
     const [remainder, setRemainder] = React.useState(null)
     const [deleteShown, setDeleteShown] = React.useState(false)
+    const [tagMenuShown, setTagMenuShown] = React.useState(false)
+    const [tag, setTag] = React.useState("")
 
     function deleteNote(id) {
         const saved = JSON.parse(localStorage.getItem("notes")) || [];
@@ -58,7 +60,7 @@ export function Note(props) {
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={undoIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={redoIcon} alt="" />
                     </div>
-                    <div onClick={()=>setEditShown(false)} className="px-6 py-2 mr-3.75 text-white cursor-pointer hover:font-semibold">
+                    <div onClick={() => setEditShown(false)} className="px-6 py-2 mr-3.75 text-white cursor-pointer hover:font-semibold">
                         Kapat
                     </div>
                 </div>
@@ -66,7 +68,7 @@ export function Note(props) {
             {props.img && <div>
                 <img src={props.img} alt="preview" />
             </div>}
-            <div onClick={()=>setEditShown(prev => !prev)} className="pt-4 px-4 text-xl font-semibold cursor-pointer">
+            <div onClick={() => setEditShown(prev => !prev)} className="pt-4 px-4 text-xl font-semibold cursor-pointer">
                 <h1 className="wrap-break-word">
                     {props.title}
                 </h1>
@@ -77,7 +79,7 @@ export function Note(props) {
                 </p>
             </div>
             {remainder && <div className="py-1.25 px-2.5">
-                <div onMouseEnter={()=>setDeleteShown(true)} onMouseLeave={()=>setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full">
+                <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full">
                     {remainder}
                     {deleteShown && <img onClick={() => setRemainder(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full p" src={closeIcon} alt="" />}
                 </div>
@@ -100,31 +102,55 @@ export function Note(props) {
             </div>}
             {moreShown && <div className="flex flex-col absolute top-full left-48 bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] text-sm py-2 w-[228.8px] z-10">
                 <div onClick={() => deleteNote(props.id)} className="py-1.25 pl-4.25 pr-2.5 font-semibold cursor-pointer hover:bg-[rgba(255,255,255,0.3)]">Notu sil</div>
-                <div className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)] cursor-pointer">Etiket ekle</div>
+                <div
+                    onClick={() => {
+                        setTagMenuShown(prev => !prev);
+                        setMoreShown(prev => !prev);
+                    }
+                    }
+                    className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)] cursor-pointer">Etiket ekle</div>
             </div>}
             {remainderMenuShown && <div className="flex flex-col -bottom-60 absolute z-50 bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)]">
                 <div className="p-3.75">
                     <h1 className="text-[14px] text-[#E8EAED] font-semibold">Daha sonra anımsat</h1>
                     <p className="text-[13px] text-[#E8EAED] font-semibold">Hatırlatıcılarınız Google Görevler'e kaydedilir</p>
                 </div>
-                <div onClick={(e)=>setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                <div onClick={(e) => setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
                     <div className="w-full flex justify-between">Bugün daha sonra <span>18:00</span></div>
                 </div>
-                <div onClick={(e)=>setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                <div onClick={(e) => setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
                     <div className="flex justify-between w-full">Yarın <span>08.00</span></div>
                 </div>
-                <div onClick={(e)=>setRemainder(e.target.textContent)} className="px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                <div onClick={(e) => setRemainder(e.target.textContent)} className="px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
                     <div className="flex justify-between">Sonraki hafta <span>Pzt, 08:00</span></div>
                 </div>
-                <div onClick={(e)=>setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                <div onClick={(e) => setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
                     <p>Tarih ve saat seç</p>
+                </div>
+            </div>}
+            {tagMenuShown && <div className="bg-[#2d2e30] absolute z-50 -right-30 bottom-8">
+                <div className="border-b border-[#5f6368] py-2.75">
+                    <div className="text-[14px] px-3">
+                        Note etiket ekleyin
+                    </div>
+                    <div className="py-2 px-3">
+                        <input onChange={(e) => setTag(e.target.value)} className="text-[13px] focus:outline-0" type="text" placeholder="Etiket adı girin" />
+                    </div>
+                </div>
+                <div onClick={() => {
+                    setTag(tag)
+                    setTagMenuShown(prev => !prev)
+                }
+                } 
+                    className="text-[13px] pt-1.25 pb-0.75 px-2.5 font-semibold cursor-pointer">
+                    {tag && `${tag} etiketini oluşturun`}
                 </div>
             </div>}
             <div className={`flex ${isShown ? "visible" : "invisible"} items-start justify-between px-4 py-3 `}>
                 <div>
-                    <img 
-                        onClick={() => setColorShown(prev => !prev)} 
-                        className="h-5 w-5 cursor-pointer" src={paletteIcon} alt="" 
+                    <img
+                        onClick={() => setColorShown(prev => !prev)}
+                        className="h-5 w-5 cursor-pointer" src={paletteIcon} alt=""
                     />
                 </div>
                 <div>

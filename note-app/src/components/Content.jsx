@@ -26,11 +26,6 @@ import React from "react"
 export function Content({ flexDir, setNotes, notes ,img , setImg }) {
 
     const [isShown, setIsShown] = React.useState(false);
-
-    function openNoteMenu() {
-        setIsShown(true)
-    }
-
     const [formatShown, setFormatShown] = React.useState(false)
     const [title, setTitle] = React.useState("")
     const [content, setContent] = React.useState("")
@@ -39,7 +34,6 @@ export function Content({ flexDir, setNotes, notes ,img , setImg }) {
     const [hasUnderline, setHasUnderline] = React.useState(false)
     const [isH1, setIsH1] = React.useState(false)
     const [isH2, setIsH2] = React.useState(false)
-
 
     function addNote() {
         if (!title.trim() || !content.trim()) {
@@ -80,7 +74,7 @@ export function Content({ flexDir, setNotes, notes ,img , setImg }) {
 
     return (
         <div className="flex flex-col items-center w-full">
-            {!isShown && <div onClick={openNoteMenu} className="border border-[#5f6368] placeholder-[#99999B] w-1/2 py-2.5 px-4 mt-8 rounded-md text-[#e8eaed] cursor-text flex items-center justify-between">
+            {!isShown && <div onClick={() => setIsShown(true)} className="border border-[#5f6368] placeholder-[#99999B] w-1/2 py-2.5 px-4 mt-8 rounded-md text-[#e8eaed] cursor-text flex items-center justify-between">
                 Not alın...
                 <div className="flex items-center">
                     <img className="mx-4" src={checkBox} alt="" />
@@ -168,7 +162,7 @@ export function Content({ flexDir, setNotes, notes ,img , setImg }) {
                     </div>
                 </div>
             </div>}
-            <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6`}>
+            <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6 max-w-260`}>
                 {notes.map((n) => (
                     <Note
                         key={n.id}
