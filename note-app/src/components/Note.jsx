@@ -26,9 +26,12 @@ export function Note(props) {
 
     function deleteNote(id) {
         const saved = JSON.parse(localStorage.getItem("notes")) || [];
-        const deleted = saved.filter(note => note.id !== id);
-        localStorage.setItem("notes", JSON.stringify(deleted));
-        props.setNotes(deleted);
+        const deleted = saved.filter(note => note.id === id);
+        const remaining = saved.filter(note => note.id !== id);
+        localStorage.setItem("notes", JSON.stringify(remaining));
+        props.setNotes(remaining);
+        props.setDeletedNotes(deleted)
+        localStorage.setItem("deletedNotes", JSON.stringify([...deleted, deleted]));
     }
 
     function archiveNotes(id){

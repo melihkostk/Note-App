@@ -2,10 +2,10 @@ import './App.css'
 import { Content } from './components/Content'
 import { Header } from './components/Header'
 import { Sidebar } from './components/Sidebar'
-/*import { Archive } from './components/Archive'*/
+import { Archive } from './components/Archive'
+import { Trash } from './components/Trash'
 import closeIcon from './assets/close.png'
 import React from 'react'
-import { Archive } from './components/Archive'
 
 function App() {
 
@@ -13,10 +13,12 @@ function App() {
   const [sidebarShown, setSidebarShown] = React.useState(true);
   const [notes, setNotes] = React.useState([])
   const [archivedNotes, setArchivedNotes] = React.useState([])
+  const [deletedNotes, setDeletedNotes] = React.useState([])
   const [img, setImg] = React.useState("")
   const [archiveShown, setArchiveShown] = React.useState(false)
   const [contentShown, setContentShown] = React.useState(true)
   const [archivePage, setArchivePage] = React.useState(false)
+  const [trashPage, setTrashPage] = React.useState(false)
 
   React.useEffect(() => {
     const timer = setInterval(() => {
@@ -26,18 +28,21 @@ function App() {
     return () => clearTimeout(timer);
 
   }, [archiveShown]);
-  console.log("archivedNotes:", archivedNotes);
+  
   return (
     <>
       <Header setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
       <div className='flex'>
-        <Sidebar sidebarShown={sidebarShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
+        <Sidebar sidebarShown={sidebarShown} setTrashPage={setTrashPage} setArchivePage={setArchivePage} setContentShown={setContentShown} />
         {contentShown && <div className='w-full flex flex-col items-start'>
-          <Content flexDir={flexDir} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
+          <Content flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
         </div>}
         {archivePage && <div className='w-full flex flex-col items-start'>
-          <Archive
-            archivedNotes={archivedNotes}
+          <Archive archivedNotes={archivedNotes}
+          />
+        </div>}
+        {trashPage && <div className='w-full flex flex-col items-start'>
+          <Trash deletedNotes={deletedNotes}
           />
         </div>}
       </div>
