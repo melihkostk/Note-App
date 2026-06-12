@@ -18,6 +18,7 @@ import h1 from "../assets/h1.png"
 import h2 from "../assets/h2.png"
 import normal from "../assets/normal.png"
 import deleteIcon from "../assets/delete.png"
+import lambIcon from "../assets/bulb.png"
 
 import { Note } from "./Note.jsx"
 
@@ -162,7 +163,11 @@ export function Content({ flexDir,setArchivedNotes,setNotes, notes ,img , setImg
                     </div>
                 </div>
             </div>}
-            <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6 max-w-260`}>
+            {notes && notes.length === 0 && <div className="flex flex-col items-center justify-center mt-[20vh]">
+                <img className="w-30 h-30 m-5" src={lambIcon} alt="" />
+                <div className="text-[#9AA0A6] text-[22px]">Eklediğiniz notlar burada görünür</div>
+            </div>}
+            {notes && notes.length > 0 && <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6 max-w-260`}>
                 {notes.map((n) => (
                     <Note
                         key={n.id}
@@ -183,7 +188,7 @@ export function Content({ flexDir,setArchivedNotes,setNotes, notes ,img , setImg
                         setDeletedNotes={setDeletedNotes}
                     />
                 ))}
-            </div>
+            </div>}
         </div>
     )
 }
