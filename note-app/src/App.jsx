@@ -13,6 +13,15 @@ function App() {
   const [img, setImg] = React.useState("")
   const [archiveShown, setArchiveShown] = React.useState(false)
 
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setArchiveShown(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+
+  }, [archiveShown]); 
+
   return (
     <>
       <Header setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
