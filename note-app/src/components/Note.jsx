@@ -57,12 +57,15 @@ export function Note(props) {
 
     function restoreArchive(id) {
         const archived = JSON.parse(localStorage.getItem("archivedNotes")) || [];
-        const updated = archived.filter(note => note.id !== id);
-        const remaining = archived.filter(note => note.id === id);
-        props.setArchivedNotes(updated);
-        props.setNotes(remaining)
-        localStorage.setItem("notes",JSON.stringify(remaining))
-        localStorage.setItem("archivedNotes", JSON.stringify(updated));
+        const notes = JSON.parse(localStorage.getItem("notes")) || [];
+        const restoredNote = archived.find(note => note.id === id);
+        const updatedArchived = archived.filter(note => note.id !== id);
+        if (!restoredNote) return;
+        const updatedNotes = [...notes, restoredNote];
+        props.setArchivedNotes(updatedArchived);
+        props.setNotes(updatedNotes);
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        localStorage.setItem("archivedNotes", JSON.stringify(updatedArchived));
     }
 
     return (
