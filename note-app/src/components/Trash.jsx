@@ -2,7 +2,7 @@ import deleteIcon from '../assets/delete.png'
 import { Note } from "./Note"
 import React from "react"
 
-export function Trash({ deletedNotes, setDeletedNotes }) {
+export function Trash({ deletedNotes, setDeletedNotes, trashPage }) {
 
     React.useEffect(() => {
         const deleted = localStorage.getItem("deletedNotes")
@@ -35,6 +35,7 @@ export function Trash({ deletedNotes, setDeletedNotes }) {
                         hasUnderline={n.hasUnderline}
                         isH1={n.isH1}
                         isH2={n.isH2}
+                        trashPage={trashPage}
                     />
                 ))}
             </div>}

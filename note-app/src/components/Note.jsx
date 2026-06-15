@@ -9,6 +9,8 @@ import undoIcon from "../assets/undo.png"
 import redoIcon from "../assets/redo.png"
 import customIcon from "../assets/custom.png"
 import closeIcon from "../assets/close.png"
+import deleteForever from "../assets/delete-forever.png"
+import restoreIcon from "../assets/restore.png"
 import React from "react"
 
 export function Note(props) {
@@ -48,7 +50,10 @@ export function Note(props) {
 
     return (
 
-        <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative max-h-max" style={{ backgroundColor: noteColor }}>
+        <div 
+        onMouseEnter={() => setIsShown(true)} 
+        onMouseLeave={() => setIsShown(false)} 
+        className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative max-h-max" style={{ backgroundColor: noteColor }}>
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className="bg-white rounded-full" src={checkIcon} alt="" />
             </div>
@@ -169,7 +174,7 @@ export function Note(props) {
                     {tag && `${tag} etiketini oluşturun`}
                 </div>
             </div>}
-            <div className={`flex ${isShown ? "visible" : "invisible"} items-start justify-between px-4 py-3 `}>
+            {!props.trashPage && <div className={`flex ${isShown ? "visible" : "invisible"} items-start justify-between px-4 py-3 `}>
                 <div>
                     <img
                         onClick={() => setColorShown(prev => !prev)}
@@ -199,7 +204,15 @@ export function Note(props) {
                 <div>
                     <img onClick={() => setMoreShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={moreIcon} alt="" />
                 </div>
-            </div>
+            </div>}
+            {props.trashPage && <div className={`flex ${isShown ? "visible" : "invisible"} items-start px-4 py-3 `}>
+                <div className="hover:bg-[#282A2C] flex items-center justify-center rounded-full">
+                    <img className="pr-2 cursor-pointer" src={deleteForever} alt="" />
+                </div>
+                <div className="hover:bg-[#282A2C] flex items-center justify-center rounded-full">
+                    <img className="pl-2 cursor-pointer" src={restoreIcon} alt="" />
+                </div>
+            </div>}
         </div>
 
     )
