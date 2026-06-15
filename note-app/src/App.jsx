@@ -39,7 +39,7 @@ function App() {
           <Content trashPage={trashPage} flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
         </div>}
         {archivePage && <div className='w-full flex flex-col items-center'>
-          <Archive archivedNotes={archivedNotes} setArchivedNotes={setArchivedNotes}
+          <Archive setNotes={setNotes} archivePage={archivePage} archivedNotes={archivedNotes} setArchivedNotes={setArchivedNotes}
           />
         </div>}
         {trashPage && <div className='w-full flex flex-col items-center mt-8'>

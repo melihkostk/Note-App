@@ -55,6 +55,16 @@ export function Note(props) {
         localStorage.setItem("deletedNotes", JSON.stringify(updated));
     }
 
+    function restoreArchive(id) {
+        const archived = JSON.parse(localStorage.getItem("archivedNotes")) || [];
+        const updated = archived.filter(note => note.id !== id);
+        const remaining = archived.filter(note => note.id === id);
+        props.setArchivedNotes(updated);
+        props.setNotes(remaining)
+        localStorage.setItem("notes",JSON.stringify(remaining))
+        localStorage.setItem("archivedNotes", JSON.stringify(updated));
+    }
+
     return (
 
         <div
@@ -198,7 +208,7 @@ export function Note(props) {
                     <input id="fileInput" type="file" className="hidden" />
                 </div>
                 <div>
-                    <img
+                    {!props.archivePage && <img
                         onClick={() => {
                             props.setArchiveShown(prev => !prev)
                             archiveNotes(props.id)
@@ -206,7 +216,14 @@ export function Note(props) {
                         }
                         }
                         className="h-5 w-5 cursor-pointer" src={archIcon} alt=""
-                    />
+                    />}
+                    {props.archivePage && <img
+                        onClick={() => {
+                            restoreArchive(props.id)
+                        }
+                        }
+                        className="h-5 w-5 cursor-pointer" src={archIcon} alt=""
+                    />}
                 </div>
                 <div>
                     <img onClick={() => setMoreShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={moreIcon} alt="" />
