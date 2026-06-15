@@ -36,6 +36,7 @@ export function Trash({ deletedNotes, setDeletedNotes, trashPage }) {
                         isH1={n.isH1}
                         isH2={n.isH2}
                         trashPage={trashPage}
+                        setDeletedNotes={setDeletedNotes}
                     />
                 ))}
             </div>}
