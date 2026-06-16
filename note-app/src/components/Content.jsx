@@ -24,7 +24,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({flexDir,setArchivedNotes,setNotes, notes ,img , setImg , setArchiveShown , setDeletedNotes }) {
+export function Content({flexDir,setArchivedNotes,searchInput,setNotes, notes ,img , setImg , setArchiveShown , setDeletedNotes }) {
 
     const [isShown, setIsShown] = React.useState(false);
     const [formatShown, setFormatShown] = React.useState(false)
@@ -168,7 +168,7 @@ export function Content({flexDir,setArchivedNotes,setNotes, notes ,img , setImg 
                 <div className="text-[#9AA0A6] text-[22px]">Eklediğiniz notlar burada görünür</div>
             </div>}
             {notes && notes.length > 0 && <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6 max-w-260`}>
-                {notes.map((n) => (
+                {notes.filter((item) => {return searchInput.toLowerCase() === "" ? item:item.content.toLowerCase().includes(searchInput)}).map((n) => (
                     <Note
                         key={n.id}
                         id={n.id}

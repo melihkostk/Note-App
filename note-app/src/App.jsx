@@ -29,6 +29,7 @@ function App() {
     return () => clearTimeout(timer);
 
   }, [archiveShown]);
+
   
   return (
     <>
@@ -36,7 +37,7 @@ function App() {
       <div className='flex'>
         <Sidebar sidebarShown={sidebarShown} trashPage={trashPage} setTrashPage={setTrashPage} archivePage={archivePage} contentShown={contentShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
         {contentShown && <div className='w-full flex flex-col items-start'>
-          <Content trashPage={trashPage} flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
+          <Content searchInput={searchInput} trashPage={trashPage} flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
         </div>}
         {archivePage && <div className='w-full flex flex-col items-center'>
           <Archive setNotes={setNotes} archivePage={archivePage} archivedNotes={archivedNotes} setArchivedNotes={setArchivedNotes}
