@@ -2,7 +2,7 @@ import archiveIcon from '../assets/archive.png'
 import { Note } from "./Note";
 import React from "react";
 
-export function Archive({ archivedNotes, setArchivedNotes, archivePage, restoreArchive, setNotes }) {
+export function Archive({ darkMode,archivedNotes, setArchivedNotes, archivePage, restoreArchive, setNotes }) {
 
     React.useEffect(() => {
         const archived = localStorage.getItem("archivedNotes")
@@ -36,6 +36,7 @@ export function Archive({ archivedNotes, setArchivedNotes, archivePage, restoreA
                         archivePage={archivePage}
                         restoreArchive={restoreArchive}
                         setNotes={setNotes}
+                        darkMode={darkMode}
                     />
                 ))}
             </div>

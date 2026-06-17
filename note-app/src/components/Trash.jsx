@@ -2,7 +2,7 @@ import deleteIcon from '../assets/delete.png'
 import { Note } from "./Note"
 import React from "react"
 
-export function Trash({ deletedNotes, setDeletedNotes, trashPage }) {
+export function Trash({darkMode, deletedNotes, setDeletedNotes, trashPage }) {
 
     React.useEffect(() => {
         const deleted = localStorage.getItem("deletedNotes")
@@ -15,8 +15,8 @@ export function Trash({ deletedNotes, setDeletedNotes, trashPage }) {
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="flex items-center">
-                <h1 className="text-[17px] text-[#E8EAED] italic font-semibold">Çöp Kutusu'ndaki notlar 7 gün sonra silinir.</h1>
-                {deletedNotes && <a onClick={() => { setDeletedNotes(null); localStorage.removeItem("deletedNotes") }} className={`${deletedNotes.length > 0 ? "block" : "hidden"} px-6 py-2 ml-4 cursor-pointer hover:bg-[#282A2C] text-[#8AB4F8] font-semibold text-sm`}>Çöp Kutusunu boşalt</a>}
+                <h1 className={`${darkMode ? "text-[#E8EAED]" : "text-[#202124]"} text-[17px] italic font-semibold`}>Çöp Kutusu'ndaki notlar 7 gün sonra silinir.</h1>
+                {deletedNotes && <a onClick={() => { setDeletedNotes(null); localStorage.removeItem("deletedNotes") }} className={`${deletedNotes.length > 0 ? "block" : "hidden"} px-6 py-2 ml-4 cursor-pointer ${darkMode ? "text-[#8AB4F8]" : "text-[#1A73E8]"} font-semibold text-sm`}>Çöp Kutusunu boşalt</a>}
             </div>
             {deletedNotes && deletedNotes.length === 0 && <div className='flex flex-col items-center mt-[20vh]'>
                 <img className='w-30 h-30 object-cover m-5' src={deleteIcon} alt="" />
@@ -37,6 +37,7 @@ export function Trash({ deletedNotes, setDeletedNotes, trashPage }) {
                         isH2={n.isH2}
                         trashPage={trashPage}
                         setDeletedNotes={setDeletedNotes}
+                        darkMode={darkMode}
                     />
                 ))}
             </div>}
