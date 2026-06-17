@@ -20,6 +20,7 @@ function App() {
   const [archivePage, setArchivePage] = React.useState(false)
   const [trashPage, setTrashPage] = React.useState(false)
   const [searchInput, setSearchInput] = React.useState("")
+  const [darkMode, setDarkMode] = React.useState(true)
 
   React.useEffect(() => {
     const timer = setInterval(() => {
@@ -32,8 +33,8 @@ function App() {
 
   
   return (
-    <>
-      <Header contentShown={contentShown} trashPage={trashPage} archivePage={archivePage} searchInput={searchInput} setSearchInput={setSearchInput} setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
+    <div className={`h-screen ${darkMode ? "bg-[#202124]" : "bg-white"}`}>
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} contentShown={contentShown} trashPage={trashPage} archivePage={archivePage} searchInput={searchInput} setSearchInput={setSearchInput} setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
       <div className='flex'>
         <Sidebar sidebarShown={sidebarShown} trashPage={trashPage} setTrashPage={setTrashPage} archivePage={archivePage} contentShown={contentShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
         {contentShown && <div className='w-full flex flex-col items-start'>
@@ -61,7 +62,7 @@ function App() {
           </div>
         </div>
       </div>}
-    </>
+    </div>
   )
 }
 
