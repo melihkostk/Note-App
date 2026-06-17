@@ -36,7 +36,7 @@ function App() {
     <div className={`h-screen ${darkMode ? "bg-[#202124]" : "bg-white"}`}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} contentShown={contentShown} trashPage={trashPage} archivePage={archivePage} searchInput={searchInput} setSearchInput={setSearchInput} setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
       <div className='flex'>
-        <Sidebar sidebarShown={sidebarShown} trashPage={trashPage} setTrashPage={setTrashPage} archivePage={archivePage} contentShown={contentShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
+        <Sidebar darkMode={darkMode} sidebarShown={sidebarShown} trashPage={trashPage} setTrashPage={setTrashPage} archivePage={archivePage} contentShown={contentShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
         {contentShown && <div className='w-full flex flex-col items-start'>
           <Content searchInput={searchInput} trashPage={trashPage} flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
         </div>}

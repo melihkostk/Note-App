@@ -30,11 +30,11 @@ export function Header({ darkMode,setDarkMode,setFlexDir, setSidebarShown ,setSe
                 </div>}
                 {archivePage && <div className="flex items-center gap-2 cursor-pointer">
                     <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
-                    <span className='text-xl text-[#E3E3E3] font-semibold'>Arşiv</span>
+                    <span className={`text-xl ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} font-semibold`}>Arşiv</span>
                 </div>}
                 {trashPage && <div className="flex items-center gap-2 cursor-pointer">
                     <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
-                    <span className='text-xl text-[#E3E3E3] font-semibold'>Çöp Kutusu</span>
+                    <span className={`text-xl ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} font-semibold`}>Çöp Kutusu</span>
                 </div>}
                 <div className='w-6/10'>
                     <input
