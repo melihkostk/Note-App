@@ -12,7 +12,7 @@ export function Sidebar({darkMode, sidebarShown, archivePage ,contentShown, setA
                     setContentShown(true);
                     setTrashPage(false)
                 }}
-                className={`${darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#202124] hover:bg-[#f1f3f4]"} flex items-center text-sm font-semibold rounded-r-full p-3 ${contentShown ? "bg-[#41311C]" : ""} cursor-pointer`}>
+                className={`${darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#202124] hover:bg-[#f1f3f4]"} flex items-center text-sm font-semibold rounded-r-full p-3 ${contentShown ? `${darkMode ? "bg-[#41311C]" : "bg-[#feefc3]"}` : ""} cursor-pointer`}>
                 <img className='px-3' src={bulbIcon} alt="Bulb Icon" />
                 <div className='ml-5'>Notlar</div>
             </div>
@@ -21,7 +21,7 @@ export function Sidebar({darkMode, sidebarShown, archivePage ,contentShown, setA
                 setContentShown(false);
                 setTrashPage(false)
             }}
-                className={`${darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#202124] hover:bg-[#f1f3f4]"} flex items-center text-sm font-semibold p-3 ${archivePage ? "bg-[#41311C]" : ""} cursor-pointer rounded-r-full`}>
+                className={`${darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#202124] hover:bg-[#f1f3f4]"} flex items-center text-sm font-semibold p-3 ${archivePage ? `${darkMode ? "bg-[#41311C]" : "bg-[#feefc3]"}` : ""} cursor-pointer rounded-r-full`}>
                 <img className='px-3' src={archiveIcon} alt="Archive Icon" />
                 <div className='ml-5'>Arşiv</div>
             </div>
@@ -30,7 +30,7 @@ export function Sidebar({darkMode, sidebarShown, archivePage ,contentShown, setA
                 setContentShown(false);
                 setTrashPage(true)
             }} 
-            className={`${darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#202124] hover:bg-[#f1f3f4]"} flex items-center text-sm font-semibold p-3 ${trashPage ? "bg-[#41311C]" : ""} cursor-pointer rounded-r-full`}>
+            className={`${darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#202124] hover:bg-[#f1f3f4]"} flex items-center text-sm font-semibold p-3 ${trashPage ? `${darkMode ? "bg-[#41311C]" : "bg-[#feefc3]"}` : ""} cursor-pointer rounded-r-full`}>
                 <img className='px-3' src={deleteIcon} alt="Archive Icon" />
                 <div className='ml-5'>Çöp Kutusu</div>
             </div>

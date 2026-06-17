@@ -21,7 +21,7 @@ export function Header({ darkMode,setDarkMode,setFlexDir, setSidebarShown ,setSe
     const [showApps, setShowApps] = React.useState(false);
 
     return (
-        <header className="p-2 border-b border-[#5f6368]">
+        <header className="p-2 border-b border-[#e0e0e0]">
             <div className='flex items-center justify-between'>
                 {contentShown && <div className="flex items-center gap-2 cursor-pointer">
                     <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
