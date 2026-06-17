@@ -88,7 +88,7 @@ export function Note(props) {
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className={`${props.darkMode ? "bg-white" : "bg-black"} rounded-full`} src={props.darkMode ? checkIcon : whiteCheck} alt="" />
             </div>
-            <div onClick={(e) => e.stopPropagation()} className={`${editShown ? "flex" : "hidden"} flex-col fixed left-[30%] top-10 border rounded-lg bg-[#202124] z-20 border-[#5f6368] w-150`}>
+            <div onClick={(e) => e.stopPropagation()} className={`${editShown ? "flex" : "hidden"} flex-col fixed left-[30%] top-10 border rounded-lg ${props.darkMode ? "bg-[#202124] border-[#5f6368]" : "bg-white border-white shadow-[0_4px_12px_rgba(0,0,0,0.25)]"} z-20 w-150`}>
                 <div className="pt-4 px-4 text-xl font-semibold w-full">
                     <input className="focus:outline-none w-full" type="text" />
                 </div>
@@ -97,7 +97,7 @@ export function Note(props) {
                         <input className="focus:outline-none w-full" type="text" />
                     </div>
                 </div>
-                <div className="self-end px-2.5 text-[12px] font-semibold text-[#FFFFFFCC]">
+                <div className={`self-end px-2.5 text-[12px] font-semibold ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000CC]"}`}>
                     Son Düzenleme: 12:25
                 </div>
                 <div className="flex items-center justify-between my-1">
@@ -111,7 +111,7 @@ export function Note(props) {
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={undoIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={redoIcon} alt="" />
                     </div>
-                    <div onClick={() => setEditShown(false)} className="px-6 py-2 mr-3.75 text-white cursor-pointer hover:font-semibold">
+                    <div onClick={() => setEditShown(false)} className={`px-6 py-2 mr-3.75 ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000de]"} text-[14px] font-semibold cursor-pointer `}>
                         Kapat
                     </div>
                 </div>
