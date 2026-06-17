@@ -83,7 +83,8 @@ export function Note(props) {
         <div
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
-            className="border border-[#5f6368] text-white rounded-xl max-w-60 min-w-60 relative max-h-max" style={{ backgroundColor: noteColor }}>
+            className={`${props.darkMode ? "border border-[#5f6368]" : "border border-[#e0e0e0] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)]"} text-white rounded-xl max-w-60 min-w-60 relative max-h-max`} style={{ backgroundColor: noteColor }}
+            >
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className={`${props.darkMode ? "bg-white" : "bg-black"} rounded-full`} src={props.darkMode ? checkIcon : whiteCheck} alt="" />
             </div>
