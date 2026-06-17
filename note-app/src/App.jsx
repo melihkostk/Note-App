@@ -33,7 +33,7 @@ function App() {
 
   
   return (
-    <div className={`h-screen ${darkMode ? "bg-[#202124]" : "bg-white"}`}>
+    <div className={`min-h-screen ${darkMode ? "bg-[#202124]" : "bg-white"}`}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} contentShown={contentShown} trashPage={trashPage} archivePage={archivePage} searchInput={searchInput} setSearchInput={setSearchInput} setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />
       <div className='flex'>
         <Sidebar darkMode={darkMode} sidebarShown={sidebarShown} trashPage={trashPage} setTrashPage={setTrashPage} archivePage={archivePage} contentShown={contentShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />

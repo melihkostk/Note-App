@@ -22,7 +22,7 @@ export function Trash({darkMode, deletedNotes, setDeletedNotes, trashPage }) {
                 <img className='w-30 h-30 object-cover m-5' src={deleteIcon} alt="" />
                 <div className='text-[22px] text-[#9AA0A6]'>Çöp Kutusu'nda not yok</div>
             </div>}
-            {deletedNotes && deletedNotes.length > 0 && <div className="flex items-start gap-3 w-full mt-8 flex-wrap">
+            {deletedNotes && deletedNotes.length > 0 && <div className="flex items-start gap-3 w-full mt-8 flex-wrap max-w-260">
                 {deletedNotes.map((n) => (
                     <Note
                         key={n.id}
