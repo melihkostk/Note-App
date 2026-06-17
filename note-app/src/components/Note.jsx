@@ -20,6 +20,7 @@ import darkMore from "../assets/dark-more.png"
 import darkColor from "../assets/dark-color.png"
 import darkDelete from "../assets/dark-delete.png"
 import darkRestore from "../assets/dark-restore.png"
+import darkClose from "../assets/dark-close.png"
 import React from "react"
 
 export function Note(props) {
@@ -129,15 +130,15 @@ export function Note(props) {
             </div>
             {<div className="flex flex-wrap">
                 {remainder && <div className="py-1.25 px-2.5">
-                    <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full relative pr-6">
+                    <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className={`${props.darkMode ? "text-white" : "text-[#202124]"} flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full relative pr-6`}>
                         {remainder}
-                        {deleteShown && <img onClick={() => setRemainder(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full absolute right-0" src={closeIcon} alt="" />}
+                        {deleteShown && <img onClick={() => setRemainder(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full absolute right-0" src={props.darkMode ? closeIcon : darkClose} alt="" />}
                     </div>
                 </div>}
                 {tag && <div className="py-1.25 px-2.5">
-                    <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className="flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full relative pr-6">
+                    <div onMouseEnter={() => setDeleteShown(true)} onMouseLeave={() => setDeleteShown(false)} className={`${props.darkMode ? "text-white" : "text-[#202124]"} flex gap-1 items-center border-2 border-[#5f6368] p-1.25 w-max text-[11px] font-semibold rounded-full relative pr-6`}>
                         {tag}
-                        {deleteShown && <img onClick={() => setTag(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full absolute right-0" src={closeIcon} alt="" />}
+                        {deleteShown && <img onClick={() => setTag(null)} className="w-4.5 h-4.5 cursor-pointer hover:bg-[rgba(255,255,255,0.3)] rounded-full absolute right-0" src={props.darkMode ? closeIcon : darkClose} alt="" />}
                     </div>
                 </div>}
             </div>}
@@ -167,31 +168,31 @@ export function Note(props) {
                     }
                     className="py-1.25 pl-4.25 pr-2.5 font-semibold hover:bg-[rgba(255,255,255,0.3)] cursor-pointer">Etiket ekle</div>
             </div>}
-            {remainderMenuShown && <div className="flex flex-col -bottom-60 absolute z-50 bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)]">
+            {remainderMenuShown && <div className={`flex flex-col -bottom-60 absolute z-50 ${props.darkMode ? "bg-[#202124]" : "bg-white"} shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)]`}>
                 <div className="p-3.75">
-                    <h1 className="text-[14px] text-[#E8EAED] font-semibold">Daha sonra anımsat</h1>
-                    <p className="text-[13px] text-[#E8EAED] font-semibold">Hatırlatıcılarınız Google Görevler'e kaydedilir</p>
+                    <h1 className={`text-[14px] ${props.darkMode ? "text-[#E8EAED]" : "text-[#202124]"} font-semibold`}>Daha sonra anımsat</h1>
+                    <p className={`text-[13px] ${props.darkMode ? "text-[#E8EAED]" : "text-[#202124]"} font-semibold`}>Hatırlatıcılarınız Google Görevler'e kaydedilir</p>
                 </div>
-                <div onClick={(e) => setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                <div onClick={(e) => setRemainder(e.target.textContent)} className={`flex justify-between px-3.75 py-2.5 text-[13px] ${props.darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#3C4043] hover:bg-[#0000001a]"} cursor-pointer`}>
                     <div className="w-full flex justify-between">Bugün daha sonra <span>18:00</span></div>
                 </div>
-                <div onClick={(e) => setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                <div onClick={(e) => setRemainder(e.target.textContent)} className={`flex justify-between px-3.75 py-2.5 text-[13px] ${props.darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#3C4043] hover:bg-[#0000001a]"} cursor-pointer`}>
                     <div className="flex justify-between w-full">Yarın <span>08.00</span></div>
                 </div>
-                <div onClick={(e) => setRemainder(e.target.textContent)} className="px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
-                    <div className="flex justify-between">Sonraki hafta <span>Pzt, 08:00</span></div>
+                <div onClick={(e) => setRemainder(e.target.textContent)} className={`flex justify-between px-3.75 py-2.5 text-[13px] ${props.darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#3C4043] hover:bg-[#0000001a]"} cursor-pointer`}>
+                    <div className="flex justify-between w-full">Sonraki hafta <span>Pzt, 08:00</span></div>
                 </div>
-                <div onClick={(e) => setRemainder(e.target.textContent)} className="flex justify-between px-3.75 py-2.5 text-[13px] cursor-pointer hover:bg-[#282A2C]">
+                <div onClick={(e) => setRemainder(e.target.textContent)} className={`flex justify-between px-3.75 py-2.5 text-[13px] ${props.darkMode ? "text-[#E8EAED] hover:bg-[#282A2C]" : "text-[#3C4043] hover:bg-[#0000001a]"} cursor-pointer`}>
                     <p>Tarih ve saat seç</p>
                 </div>
             </div>}
-            {tagMenuShown && <div className="bg-[#2d2e30] absolute z-50 -right-30 bottom-8">
+            {tagMenuShown && <div className={`${props.darkMode ? "bg-[#2d2e30]" : "bg-white"} absolute z-50 -right-30 bottom-8 shadow-[0_1px_2px_0_rgba(60,64,67,0.3),0_2px_6px_2px_rgba(60,64,67,0.15)]`}>
                 <div className="border-b border-[#5f6368] py-2.75">
-                    <div className="text-[14px] px-3">
+                    <div className={`text-[14px] px-3 ${props.darkMode ? "text-white" : "text-[#202124]"}`}>
                         Note etiket ekleyin
                     </div>
                     <div className="py-2 px-3">
-                        <input onChange={(e) => setTag(e.target.value)} className="text-[13px] focus:outline-0" type="text" placeholder="Etiket adı girin" />
+                        <input onChange={(e) => setTag(e.target.value)} className={`${props.darkMode ? "text-white placeholder:text-white" : "text-[#202124] placeholder:text-[#202124]"} text-[13px] focus:outline-0`} type="text" placeholder="Etiket adı girin" />
                     </div>
                 </div>
                 <div onClick={() => {
@@ -199,7 +200,7 @@ export function Note(props) {
                     setTagMenuShown(prev => !prev)
                 }
                 }
-                    className="text-[13px] pt-1.25 pb-0.75 px-2.5 font-semibold cursor-pointer">
+                    className={`${props.darkMode ? "text-white" : "text-[#202124]"} text-[13px] pt-1.25 pb-0.75 px-2.5 font-semibold cursor-pointer`}>
                     {tag && `${tag} etiketini oluşturun`}
                 </div>
             </div>}
