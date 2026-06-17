@@ -3,12 +3,19 @@ import imageIcon from "../assets/image.png"
 import customIcon from "../assets/custom.png"
 import darkCustom from "../assets/dark-custom.png"
 import boldIcon from "../assets/bold.png"
+import blackBold from "../assets/black-bold.png"
 import italicIcon from "../assets/italic.png"
+import blackItalic from "../assets/black-italic.png"
 import underlineIcon from "../assets/underline.png"
+import blackUnderline from "../assets/black-underline.png"
 import cleanIcon from "../assets/format-clean.png"
+import blackClean from "../assets/black-clean.png"
 import h1 from "../assets/h1.png"
+import blackH1 from "../assets/black-h1.png"
+import blackH2 from "../assets/black-h2.png"
 import h2 from "../assets/h2.png"
 import normal from "../assets/normal.png"
+import blackNormal from "../assets/black-normal.png"
 import deleteIcon from "../assets/delete.png"
 import lambIcon from "../assets/bulb.png"
 import darkImage from "../assets/dark-image.png"
@@ -86,10 +93,10 @@ export function Content({darkMode, flexDir,setArchivedNotes,searchInput,setNotes
                 {formatShown && <div className="flex items-center px-0.5 shadow-[0_1px_3px_1px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] mx-2 w-max">
                     <div className="flex border-r border-[#5f6368]">
                         <div>
-                            <img onClick={() => setIsH1(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={h1} alt="" />
+                            <img onClick={() => setIsH1(prev => !prev)} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? h1 : blackH1} alt="" />
                         </div>
                         <div>
-                            <img onClick={() => setIsH2(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={h2} alt="" />
+                            <img onClick={() => setIsH2(prev => !prev)} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? h2 : blackH2} alt="" />
                         </div>
                         <div>
                             <img
@@ -97,19 +104,19 @@ export function Content({darkMode, flexDir,setArchivedNotes,searchInput,setNotes
                                     setIsH1(false);
                                     setIsH2(false);
                                 }}
-                                className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={normal} alt=""
+                                className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? normal : blackNormal} alt=""
                             />
                         </div>
                     </div>
                     <div className="flex">
                         <div>
-                            <img onClick={() => setIsBold(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={boldIcon} alt="" />
+                            <img onClick={() => setIsBold(prev => !prev)} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? boldIcon : blackBold} alt="" />
                         </div>
                         <div>
-                            <img onClick={() => setIsItalic(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={italicIcon} alt="" />
+                            <img onClick={() => setIsItalic(prev => !prev)} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? italicIcon : blackItalic} alt="" />
                         </div>
                         <div>
-                            <img onClick={() => setHasUnderline(prev => !prev)} className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={underlineIcon} alt="" />
+                            <img onClick={() => setHasUnderline(prev => !prev)} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? underlineIcon : blackUnderline} alt="" />
                         </div>
                         <div>
                             <img
@@ -119,7 +126,7 @@ export function Content({darkMode, flexDir,setArchivedNotes,searchInput,setNotes
                                     setHasUnderline(false);
                                 }
                                 }
-                                className="p-2 cursor-pointer hover:bg-[#282A2C] rounded-full" src={cleanIcon} alt=""
+                                className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? cleanIcon : blackClean} alt=""
                             />
                         </div>
                     </div>
