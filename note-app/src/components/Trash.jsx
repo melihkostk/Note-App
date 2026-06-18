@@ -2,7 +2,7 @@ import deleteIcon from '../assets/delete.png'
 import { Note } from "./Note"
 import React from "react"
 
-export function Trash({darkMode, deletedNotes, setDeletedNotes, trashPage }) {
+export function Trash({setNotes,darkMode, deletedNotes, setDeletedNotes, trashPage }) {
 
     React.useEffect(() => {
         const deleted = localStorage.getItem("deletedNotes")
@@ -37,6 +37,7 @@ export function Trash({darkMode, deletedNotes, setDeletedNotes, trashPage }) {
                         isH2={n.isH2}
                         trashPage={trashPage}
                         setDeletedNotes={setDeletedNotes}
+                        setNotes={setNotes}
                         darkMode={darkMode}
                     />
                 ))}

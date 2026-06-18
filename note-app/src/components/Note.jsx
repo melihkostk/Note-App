@@ -65,6 +65,19 @@ export function Note(props) {
         localStorage.setItem("deletedNotes", JSON.stringify(updated));
     }
 
+   function restoreTrash(id) {
+    const saved = JSON.parse(localStorage.getItem("notes")) || [];
+    const deleted = JSON.parse(localStorage.getItem("deletedNotes")) || [];
+    const restored = deleted.find(note => note.id === id);
+    const remaining = deleted.filter(note => note.id !== id);
+    if (!restored) return;
+    const updatedNotes = [...saved, restored];
+    props.setDeletedNotes(remaining);
+    props.setNotes(updatedNotes);
+    localStorage.setItem("deletedNotes", JSON.stringify(remaining));
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+}
+
     function restoreArchive(id) {
         const archived = JSON.parse(localStorage.getItem("archivedNotes")) || [];
         const notes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -248,7 +261,7 @@ export function Note(props) {
                     <img className="pr-2 cursor-pointer" src={props.darkMode ? deleteForeverIcon : darkDelete} alt="" title="Tamamıyla sil" />
                 </div>
                 <div className="flex items-center justify-center rounded-full">
-                    <img className="pl-2 cursor-pointer" src={props.darkMode ? restoreIcon : darkRestore} alt="" title="Geri yükle" />
+                    <img onClick={() => restoreTrash(props.id)} className="pl-2 cursor-pointer" src={props.darkMode ? restoreIcon : darkRestore} alt="" title="Geri yükle" />
                 </div>
             </div>}
         </div>

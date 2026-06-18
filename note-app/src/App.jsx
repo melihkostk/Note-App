@@ -45,7 +45,7 @@ function App() {
           />
         </div>}
         {trashPage && <div className='w-full flex flex-col items-center mt-8'>
-          <Trash darkMode={darkMode} trashPage={trashPage} deletedNotes={deletedNotes} setDeletedNotes={setDeletedNotes}
+          <Trash darkMode={darkMode} setNotes={setNotes} trashPage={trashPage} deletedNotes={deletedNotes} setDeletedNotes={setDeletedNotes}
           />
         </div>}
       </div>
