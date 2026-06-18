@@ -35,6 +35,8 @@ export function Note(props) {
     const [deleteShown, setDeleteShown] = React.useState(false)
     const [tagMenuShown, setTagMenuShown] = React.useState(false)
     const [tag, setTag] = React.useState("")
+    const [editedTitle, setEditedTitle] = React.useState("");
+    const [editedNote, setEditedNote] = React.useState("");
 
     function deleteNote(id) {
         const saved = JSON.parse(localStorage.getItem("notes")) || [];
@@ -65,7 +67,7 @@ export function Note(props) {
         localStorage.setItem("deletedNotes", JSON.stringify(updated));
     }
 
-   function restoreTrash(id) {
+    function restoreTrash(id) {
         const saved = JSON.parse(localStorage.getItem("notes")) || [];
         const deleted = JSON.parse(localStorage.getItem("deletedNotes")) || [];
         const restored = deleted.find(note => note.id === id);
@@ -76,7 +78,7 @@ export function Note(props) {
         props.setNotes(updatedNotes);
         localStorage.setItem("deletedNotes", JSON.stringify(remaining));
         localStorage.setItem("notes", JSON.stringify(updatedNotes));
-}
+    }
 
     function restoreArchive(id) {
         const archived = JSON.parse(localStorage.getItem("archivedNotes")) || [];
@@ -91,23 +93,40 @@ export function Note(props) {
         localStorage.setItem("archivedNotes", JSON.stringify(updatedArchived));
     }
 
+    function editNote(id) {
+        const saved = JSON.parse(localStorage.getItem("notes")) || [];
+
+        if (editedTitle && editedNote) {
+            
+            const updated = saved.map(note =>
+                note.id === id ? { ...note, title: editedTitle, content: editedNote } : note
+            );
+
+            localStorage.setItem("notes", JSON.stringify(updated));
+            props.setNotes(updated);
+        }
+        else{
+            return
+        }
+    }
+
     return (
 
         <div
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
             className={`${props.darkMode ? "border border-[#5f6368]" : "border border-[#e0e0e0] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)]"} text-white rounded-xl max-w-60 min-w-60 relative max-h-max`} style={{ backgroundColor: noteColor }}
-            >
+        >
             <div className={`w-5 h-5 absolute -top-2.5 -left-2 ${isShown ? "visible" : "invisible"}`}>
                 <img className={`${props.darkMode ? "bg-white" : "bg-black"} rounded-full`} src={props.darkMode ? checkIcon : whiteCheck} alt="" />
             </div>
             <div onClick={(e) => e.stopPropagation()} className={`${editShown ? "flex" : "hidden"} flex-col fixed left-[30%] top-10 border rounded-lg ${props.darkMode ? "bg-[#202124] border-[#5f6368]" : "bg-white border-white shadow-[0_4px_12px_rgba(0,0,0,0.25)]"} z-20 w-150`}>
                 <div className="pt-4 px-4 text-xl font-semibold w-full">
-                    <input className="focus:outline-none w-full" type="text" />
+                    <input onChange={(e) => setEditedTitle(e.target.value)} className={`${props.darkMode ? "text-white" : "text-[#202124]"} focus:outline-none w-full`} type="text" value={editedTitle} />
                 </div>
                 <div className="px-4 py-3 text-wrap">
                     <div className={`wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.isH1 ? "text-xl" : ""} ${props.isH2 ? "text-lg" : ""} `}>
-                        <input className="focus:outline-none w-full" type="text" />
+                        <input onChange={(e) => setEditedNote(e.target.value)} className={`${props.darkMode ? "text-white" : "text-[#202124]"} focus:outline-none w-full`} type="text" value={editedNote} />
                     </div>
                 </div>
                 <div className={`self-end px-2.5 text-[12px] font-semibold ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000CC]"}`}>
@@ -124,7 +143,7 @@ export function Note(props) {
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={undoIcon} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={redoIcon} alt="" />
                     </div>
-                    <div onClick={() => setEditShown(false)} className={`px-6 py-2 mr-3.75 ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000de]"} text-[14px] font-semibold cursor-pointer `}>
+                    <div onClick={() => { setEditShown(false); editNote(props.id) }} className={`px-6 py-2 mr-3.75 ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000de]"} text-[14px] font-semibold cursor-pointer `}>
                         Kapat
                     </div>
                 </div>
