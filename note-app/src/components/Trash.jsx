@@ -1,4 +1,4 @@
-import deleteIcon from '../assets/delete.png'
+import deleteIcon from '../assets/big-delete.png'
 import { Note } from "./Note"
 import React from "react"
 

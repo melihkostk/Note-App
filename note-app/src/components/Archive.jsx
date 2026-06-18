@@ -1,4 +1,5 @@
-import archiveIcon from '../assets/archive.png'
+
+import archiveIcon from "../assets/big-archive.png"
 import { Note } from "./Note";
 import React from "react";
 

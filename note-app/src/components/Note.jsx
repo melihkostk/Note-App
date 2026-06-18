@@ -66,16 +66,16 @@ export function Note(props) {
     }
 
    function restoreTrash(id) {
-    const saved = JSON.parse(localStorage.getItem("notes")) || [];
-    const deleted = JSON.parse(localStorage.getItem("deletedNotes")) || [];
-    const restored = deleted.find(note => note.id === id);
-    const remaining = deleted.filter(note => note.id !== id);
-    if (!restored) return;
-    const updatedNotes = [...saved, restored];
-    props.setDeletedNotes(remaining);
-    props.setNotes(updatedNotes);
-    localStorage.setItem("deletedNotes", JSON.stringify(remaining));
-    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        const saved = JSON.parse(localStorage.getItem("notes")) || [];
+        const deleted = JSON.parse(localStorage.getItem("deletedNotes")) || [];
+        const restored = deleted.find(note => note.id === id);
+        const remaining = deleted.filter(note => note.id !== id);
+        if (!restored) return;
+        const updatedNotes = [...saved, restored];
+        props.setDeletedNotes(remaining);
+        props.setNotes(updatedNotes);
+        localStorage.setItem("deletedNotes", JSON.stringify(remaining));
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
 }
 
     function restoreArchive(id) {
