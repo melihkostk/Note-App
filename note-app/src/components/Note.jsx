@@ -209,15 +209,15 @@ export function Note(props) {
                 <div>
                     <img
                         onClick={() => setColorShown(prev => !prev)}
-                        className="h-5 w-5 cursor-pointer" src={props.darkMode ? paletteIcon : darkPalette} alt=""
+                        className="h-5 w-5 cursor-pointer" src={props.darkMode ? paletteIcon : darkPalette} alt="" title="Arka plan seçenekleri"
                     />
                 </div>
                 <div>
-                    <img onClick={() => setRemainderMenuShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={props.darkMode ? alertIcon : darkAlert} alt="" />
+                    <img onClick={() => setRemainderMenuShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={props.darkMode ? alertIcon : darkAlert} alt="" title="Bana hatırlat" />
                 </div>
                 <div>
                     <label htmlFor="fileInput">
-                        <img className="h-5 w-5 cursor-pointer" src={props.darkMode ? imageIcon : darkImage} />
+                        <img className="h-5 w-5 cursor-pointer" src={props.darkMode ? imageIcon : darkImage} title="Resim ekle" />
                     </label>
                     <input id="fileInput" type="file" className="hidden" />
                 </div>
@@ -229,26 +229,26 @@ export function Note(props) {
 
                         }
                         }
-                        className="h-5 w-5 cursor-pointer" src={props.darkMode ? archIcon : darkArch} alt=""
+                        className="h-5 w-5 cursor-pointer" src={props.darkMode ? archIcon : darkArch} alt="" title="Arşivle"
                     />}
                     {props.archivePage && <img
                         onClick={() => {
                             restoreArchive(props.id)
                         }
                         }
-                        className="h-5 w-5 cursor-pointer" src={props.darkMode ? archIcon : darkArch} alt=""
+                        className="h-5 w-5 cursor-pointer" src={props.darkMode ? archIcon : darkArch} alt="" title="Arşivden çıkar"
                     />}
                 </div>
                 <div>
-                    <img onClick={() => setMoreShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={props.darkMode ? moreIcon : darkMore} alt="" />
+                    <img onClick={() => setMoreShown(prev => !prev)} className="h-5 w-5 cursor-pointer" src={props.darkMode ? moreIcon : darkMore} alt="" title="Diğer" />
                 </div>
             </div>}
             {props.trashPage && <div className={`flex ${isShown ? "visible" : "invisible"} items-start px-4 py-3 `}>
                 <div onClick={() => deleteForever(props.id)} className="flex items-center justify-center rounded-full">
-                    <img className="pr-2 cursor-pointer" src={props.darkMode ? deleteForeverIcon : darkDelete} alt="" />
+                    <img className="pr-2 cursor-pointer" src={props.darkMode ? deleteForeverIcon : darkDelete} alt="" title="Tamamıyla sil" />
                 </div>
                 <div className="flex items-center justify-center rounded-full">
-                    <img className="pl-2 cursor-pointer" src={props.darkMode ? restoreIcon : darkRestore} alt="" />
+                    <img className="pl-2 cursor-pointer" src={props.darkMode ? restoreIcon : darkRestore} alt="" title="Geri yükle" />
                 </div>
             </div>}
         </div>

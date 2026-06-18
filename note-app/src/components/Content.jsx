@@ -133,9 +133,9 @@ export function Content({darkMode, flexDir,setArchivedNotes,searchInput,setNotes
                 </div>}
                 <div className="flex items-center justify-between my-1">
                     <div className="flex items-center">
-                        <img onClick={() => setFormatShown(prev => !prev)} className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={darkMode ? customIcon : darkCustom} alt="" />
+                        <img onClick={() => setFormatShown(prev => !prev)} className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={darkMode ? customIcon : darkCustom} alt="" title="Biçimlendirme seçenekleri" />
                         <label className="mx-2" htmlFor="fileInput">
-                            <img className="h-5 w-5 cursor-pointer" src={darkMode ? imageIcon : darkImage} />
+                            <img className="h-5 w-5 cursor-pointer" src={darkMode ? imageIcon : darkImage} title="Resim ekle" />
                         </label>
                         <input
                             onChange={(e) => {
