@@ -17,7 +17,7 @@ import h2 from "../assets/h2.png"
 import normal from "../assets/normal.png"
 import blackNormal from "../assets/black-normal.png"
 import deleteIcon from "../assets/delete.png"
-import lambIcon from "../assets/bulb.png"
+import lambIcon from "../assets/big-bulb.png"
 import darkImage from "../assets/dark-image.png"
 
 import { Note } from "./Note.jsx"
