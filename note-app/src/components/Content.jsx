@@ -24,7 +24,7 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({editedNotes,setEditedNotes,darkMode, flexDir,setArchivedNotes,searchInput,setNotes, notes ,img , setImg , setArchiveShown , setDeletedNotes }) {
+export function Content({setDeleteShown,editedNotes,setEditedNotes,darkMode, flexDir,setArchivedNotes,searchInput,setNotes, notes ,img , setImg , setArchiveShown , setDeletedNotes }) {
 
     const [isShown, setIsShown] = React.useState(false);
     const [formatShown, setFormatShown] = React.useState(false)
@@ -181,6 +181,7 @@ export function Content({editedNotes,setEditedNotes,darkMode, flexDir,setArchive
                         editedNotes={editedNotes}
                         setEditedNotes={setEditedNotes}
                         createdAt={n.createdAt}
+                        setDeleteShown={setDeleteShown}
                     />
                 ))}
             </div>}

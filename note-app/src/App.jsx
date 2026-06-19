@@ -16,6 +16,7 @@ function App() {
   const [deletedNotes, setDeletedNotes] = React.useState([])
   const [img, setImg] = React.useState("")
   const [archiveShown, setArchiveShown] = React.useState(false)
+  const [deleteShown, setDeleteShown] = React.useState(false);
   const [contentShown, setContentShown] = React.useState(true)
   const [archivePage, setArchivePage] = React.useState(false)
   const [trashPage, setTrashPage] = React.useState(false)
@@ -28,9 +29,18 @@ function App() {
       setArchiveShown(false);
     }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(timer);
 
   }, [archiveShown]);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setDeleteShown(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+
+  }, [deleteShown]);
 
   
   return (
@@ -39,7 +49,7 @@ function App() {
       <div className='flex'>
         <Sidebar darkMode={darkMode} sidebarShown={sidebarShown} trashPage={trashPage} setTrashPage={setTrashPage} archivePage={archivePage} contentShown={contentShown} setArchivePage={setArchivePage} setContentShown={setContentShown} />
         {contentShown && <div className='w-full flex flex-col items-start'>
-          <Content editedNotes={editedNotes} setEditedNotes={setEditedNotes} darkMode={darkMode} searchInput={searchInput} trashPage={trashPage} flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
+          <Content setDeleteShown={setDeleteShown} editedNotes={editedNotes} setEditedNotes={setEditedNotes} darkMode={darkMode} searchInput={searchInput} trashPage={trashPage} flexDir={flexDir} setDeletedNotes={setDeletedNotes} setArchivedNotes={setArchivedNotes} archivedNotes={archivedNotes} setNotes={setNotes} notes={notes} img={img} setImg={setImg} setArchiveShown={setArchiveShown} />
         </div>}
         {archivePage && <div className='w-full flex flex-col items-center'>
           <Archive darkMode={darkMode} setNotes={setNotes} archivePage={archivePage} archivedNotes={archivedNotes} setArchivedNotes={setArchivedNotes}
@@ -60,6 +70,19 @@ function App() {
           </div>
           <div>
             <img className='cursor-pointer' onClick={() => setArchiveShown(prev => !prev)} src={closeIcon} alt="" />
+          </div>
+        </div>
+      </div>}
+      {deleteShown && <div className='flex justify-between items-center bg-[#313235] w-[30%] pl-5 pr-2.5 py-2.5 fixed bottom-5 left-5'>
+        <div className='text-white text-sm font-semibold'>
+          Not çöp kutusuna gönderildi
+        </div>
+        <div className='flex items-center'>
+          <div className='text-[#8ab4f8] font-semibold text-sm px-6 py-2'>
+            Geri al
+          </div>
+          <div>
+            <img className='cursor-pointer' onClick={() => setDeleteShown(prev => !prev)} src={closeIcon} alt="" />
           </div>
         </div>
       </div>}
