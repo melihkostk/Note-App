@@ -20,7 +20,10 @@ import darkMore from "../assets/dark-more.png"
 import darkColor from "../assets/dark-color.png"
 import darkDelete from "../assets/dark-delete.png"
 import darkRestore from "../assets/dark-restore.png"
+import darkCustom from "../assets/dark-custom.png"
 import darkClose from "../assets/dark-close.png"
+import darkUndo from "../assets/dark-undo.png"
+import darkRedo from "../assets/dark-redo.png"
 import React from "react"
 
 export function Note(props) {
@@ -134,14 +137,18 @@ export function Note(props) {
                 </div>
                 <div className="flex items-center justify-between my-1">
                     <div className="flex items-center">
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={customIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={paletteIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={alertIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={imageIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={archIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={moreIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={undoIcon} alt="" />
-                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={redoIcon} alt="" />
+                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? customIcon : darkCustom} alt="" />
+                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? paletteIcon : darkPalette} alt="" />
+                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? alertIcon : darkAlert} alt="" />
+                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? imageIcon : darkImage} alt="" />
+                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? archIcon : darkArch} alt="" />
+                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? moreIcon : darkMore} alt="" />
+                        <img 
+                        onClick={()=>{
+                            setEditedNote(prev => prev?.slice(0, -1) || "");
+                        }} 
+                        className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? undoIcon : darkUndo} alt="" />
+                        <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? redoIcon : darkRedo} alt="" />
                     </div>
                     <div onClick={() => { setEditShown(false); editNote(props.id) }} className={`px-6 py-2 mr-3.75 ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000de]"} text-[14px] font-semibold cursor-pointer `}>
                         Kapat
