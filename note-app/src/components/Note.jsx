@@ -100,7 +100,7 @@ export function Note(props) {
         const saved = JSON.parse(localStorage.getItem("notes")) || [];
 
         if (editedTitle && editedNote) {
-            
+
             const updated = saved.map(note =>
                 note.id === id ? { ...note, title: editedTitle, content: editedNote } : note
             );
@@ -108,9 +108,24 @@ export function Note(props) {
             localStorage.setItem("notes", JSON.stringify(updated));
             props.setNotes(updated);
         }
-        else{
+        else {
             return
         }
+    }
+
+    function updateTime(id) {
+        const saved = JSON.parse(localStorage.getItem("notes")) || [];
+
+        const updated = saved.map(item =>
+            item.id === id
+                ? {
+                    ...item,
+                    createdAt: `${new Date().getHours()}:${new Date().getMinutes()}`
+                }
+                : item
+        );
+
+        localStorage.setItem("notes", JSON.stringify(updated));
     }
 
     return (
@@ -133,7 +148,7 @@ export function Note(props) {
                     </div>
                 </div>
                 <div className={`self-end px-2.5 text-[12px] font-semibold ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000CC]"}`}>
-                    Son Düzenleme: 12:25
+                    Son Düzenleme: {props.createdAt}
                 </div>
                 <div className="flex items-center justify-between my-1">
                     <div className="flex items-center">
@@ -143,14 +158,14 @@ export function Note(props) {
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? imageIcon : darkImage} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? archIcon : darkArch} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? moreIcon : darkMore} alt="" />
-                        <img 
-                        onClick={()=>{
-                            setEditedNote(prev => prev?.slice(0, -1) || "");
-                        }} 
-                        className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? undoIcon : darkUndo} alt="" />
+                        <img
+                            onClick={() => {
+                                setEditedNote(prev => prev?.slice(0, -1) || "");
+                            }}
+                            className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? undoIcon : darkUndo} alt="" />
                         <img className="mx-2 hover:bg-[rgba(154,160,166,0.157)] p-1.5 rounded-full cursor-pointer" src={props.darkMode ? redoIcon : darkRedo} alt="" />
                     </div>
-                    <div onClick={() => { setEditShown(false); editNote(props.id) }} className={`px-6 py-2 mr-3.75 ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000de]"} text-[14px] font-semibold cursor-pointer `}>
+                    <div onClick={() => { setEditShown(false); editNote(props.id); updateTime(props.id) }} className={`px-6 py-2 mr-3.75 ${props.darkMode ? "text-[#FFFFFFCC]" : "text-[#000000de]"} text-[14px] font-semibold cursor-pointer `}>
                         Kapat
                     </div>
                 </div>

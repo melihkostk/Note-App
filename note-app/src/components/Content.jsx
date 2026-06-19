@@ -36,6 +36,8 @@ export function Content({editedNotes,setEditedNotes,darkMode, flexDir,setArchive
     const [isH1, setIsH1] = React.useState(false)
     const [isH2, setIsH2] = React.useState(false)
 
+    let date = new Date();
+
     function addNote() {
         if (!title.trim() || !content.trim()) {
             setIsShown(false)
@@ -52,6 +54,7 @@ export function Content({editedNotes,setEditedNotes,darkMode, flexDir,setArchive
                 hasUnderline: hasUnderline,
                 isH1: isH1,
                 isH2: isH2,
+                createdAt: `${date.getHours()}:${date.getMinutes()}`
             }
 
             setNotes([...notes, newNote])
@@ -177,6 +180,7 @@ export function Content({editedNotes,setEditedNotes,darkMode, flexDir,setArchive
                         darkMode={darkMode}
                         editedNotes={editedNotes}
                         setEditedNotes={setEditedNotes}
+                        createdAt={n.createdAt}
                     />
                 ))}
             </div>}
