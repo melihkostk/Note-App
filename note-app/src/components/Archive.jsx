@@ -3,14 +3,14 @@ import archiveIcon from "../assets/big-archive.png"
 import { Note } from "./Note";
 import React from "react";
 
-export function Archive({ darkMode,archivedNotes, setArchivedNotes, archivePage, restoreArchive, setNotes }) {
+export function Archive({ darkMode, archivedNotes, setArchivedNotes, archivePage, restoreArchive, setNotes }) {
 
     React.useEffect(() => {
-        const archived = localStorage.getItem("archivedNotes")
-
-        if (archived) {
-            setArchivedNotes(JSON.parse(archived))
-        }
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/archived/list")
+            .then(res => res.json())
+            .then(data => {
+                setArchivedNotes(data)
+            })
     }, [])
 
 
@@ -26,7 +26,7 @@ export function Archive({ darkMode,archivedNotes, setArchivedNotes, archivePage,
                         key={n.id}
                         id={n.id}
                         title={n.title}
-                        note={n.content}
+                        note={n.description}
                         img={n.img}
                         isBold={n.isBold}
                         isItalic={n.isItalic}

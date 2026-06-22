@@ -24,12 +24,12 @@ import { Note } from "./Note.jsx"
 
 import React from "react"
 
-export function Content({setDeleteShown,editedNotes,setEditedNotes,darkMode, flexDir,setArchivedNotes,searchInput,setNotes, notes ,img , setImg , setArchiveShown , setDeletedNotes }) {
+export function Content({ setDeleteShown, editedNotes, setEditedNotes, darkMode, flexDir, setArchivedNotes, searchInput, setNotes, notes, img, setImg, setArchiveShown, setDeletedNotes }) {
 
     const [isShown, setIsShown] = React.useState(false);
     const [formatShown, setFormatShown] = React.useState(false)
     const [title, setTitle] = React.useState("")
-    const [content, setContent] = React.useState("")
+    const [description, setDescription] = React.useState("")
     const [isBold, setIsBold] = React.useState(false)
     const [isItalic, setIsItalic] = React.useState(false)
     const [hasUnderline, setHasUnderline] = React.useState(false)
@@ -39,59 +39,74 @@ export function Content({setDeleteShown,editedNotes,setEditedNotes,darkMode, fle
     let date = new Date();
 
     function addNote() {
-        if (!title.trim() || !content.trim()) {
-            setIsShown(false)
-            return
-        }
-        else {
-            const newNote = {
-                id: crypto.randomUUID(),
-                img: img,
-                title: title,
-                content: content,
-                isBold: isBold,
-                isItalic: isItalic,
-                hasUnderline: hasUnderline,
-                isH1: isH1,
-                isH2: isH2,
-                createdAt: `${date.getHours()}:${date.getMinutes()}`
-            }
-
-            setNotes([...notes, newNote])
-            const updatedNotes = [...notes, newNote]
-            localStorage.setItem("notes", JSON.stringify(updatedNotes))
-            setTitle("")
-            setContent("")
-            setImg("")
-            setIsShown(false)
+        if (!title.trim() || !description.trim()) {
+            setIsShown(false);
+            return;
         }
 
+        const newNote = {
+            title,
+            description,
+            img,
+            isBold,
+            isItalic,
+            hasUnderline,
+            isH1,
+            isH2,
+            createdAt: `${date.getHours()}:${date.getMinutes()}`
+        };
+
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newNote)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setNotes(prev => [...prev, data]);
+
+                setTitle("");
+                setDescription("");
+                setImg("");
+                setIsShown(false);
+            })
+            .catch(err => console.error(err));
     }
 
     React.useEffect(() => {
-        const saved = localStorage.getItem("notes")
+        const getNotes = async () => {
+            try {
+                const res = await fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes");
+                const data = await res.json();
 
-        if (saved) {
-            setNotes(JSON.parse(saved))
-        }
-    }, [])
+                setNotes(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        getNotes();
+    }, []);
+
 
     return (
         <div className="flex flex-col items-center w-full">
-            {!isShown && <div onClick={() => setIsShown(true)} className={`${darkMode ? "text-[#e8eaed] border border-[#5f6368]" :"text-[#202124] border border-gray-200"} w-1/2 py-2.5 px-4 mt-8 rounded-md cursor-text shadow-[0_1px_3px_rgba(0,0,0,0.12)]`}>
+            {!isShown && <div onClick={() => setIsShown(true)} className={`${darkMode ? "text-[#e8eaed] border border-[#5f6368]" : "text-[#202124] border border-gray-200"} w-1/2 py-2.5 px-4 mt-8 rounded-md cursor-text shadow-[0_1px_3px_rgba(0,0,0,0.12)]`}>
                 Not alın...
             </div>}
             {isShown && <div className={`border ${darkMode ? "border-[#5f6368]" : "border-[#e0e0e0]"} border-[#5f6368] shadow-[0_4px_12px_rgba(0,0,0,0.25)] w-1/2 rounded-xl mt-8`}>
                 {img && <div className="flex flex-col items-center justify-center">
                     <img className="w-full" src={img} alt="" />
-                    <img onClick={()=>setImg("")} className="self-end px-4 cursor-pointer" src={deleteIcon} alt="" />
+                    <img onClick={() => setImg("")} className="self-end px-4 cursor-pointer" src={deleteIcon} alt="" />
                 </div>}
                 <div className="flex items-center justify-between px-4 pt-4">
                     <input value={title} onChange={(e) => setTitle(e.target.value)} className={`${darkMode ? "placeholder-white text-white" : "placeholder-[#202124] text-[#202124]"} font-semibold placeholder:text-[20px] w-full focus:outline-none`} type="text" placeholder="Başlık" name="baslık" id="baslık" />
                     <img className="hover:bg-[rgba(154,160,166,0.157)] rounded-full cursor-pointer" src={keepIcon} alt="" />
                 </div>
                 <div className="px-4 py-3">
-                    <input value={content} onChange={(e) => setContent(e.target.value)} className={`${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${hasUnderline ? "underline" : ""} ${isH1 ? "text-xl" : ""} ${isH2 ? "text-lg" : ""} ${darkMode ? "placeholder-white text-white" : "placeholder-[#202124] text-[#202124]"}  placeholder:text-[16px] w-full focus:outline-none`} type="text" placeholder="Not alın..." name="not" id="note" />
+                    <input value={description} onChange={(e) => setDescription(e.target.value)} className={`${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${hasUnderline ? "underline" : ""} ${isH1 ? "text-xl" : ""} ${isH2 ? "text-lg" : ""} ${darkMode ? "placeholder-white text-white" : "placeholder-[#202124] text-[#202124]"}  placeholder:text-[16px] w-full focus:outline-none`} type="text" placeholder="Not alın..." name="not" id="note" />
                 </div>
                 {formatShown && <div className="flex items-center px-0.5 shadow-[0_1px_3px_1px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] mx-2 w-max">
                     <div className="flex border-r border-[#5f6368]">
@@ -159,19 +174,19 @@ export function Content({setDeleteShown,editedNotes,setEditedNotes,darkMode, fle
                 <div className="text-[#9AA0A6] text-[22px]">Eklediğiniz notlar burada görünür</div>
             </div>}
             {notes && notes.length > 0 && <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6 max-w-260`}>
-                {notes.filter((item) => {return searchInput.toLowerCase() === "" ? item:item.content.toLowerCase().includes(searchInput)}).map((n) => (
+                {notes.filter((item) => { return searchInput.toLowerCase() === "" ? item : item.content.toLowerCase().includes(searchInput) }).map((n) => (
                     <Note
                         key={n.id}
                         id={n.id}
                         title={n.title}
-                        note={n.content}
+                        note={n.description}
                         img={n.img}
                         isBold={n.isBold}
                         isItalic={n.isItalic}
                         hasUnderline={n.hasUnderline}
                         isH1={n.isH1}
                         isH2={n.isH2}
-                        setContent={setContent}
+                        setContent={setDescription}
                         setTitle={setTitle}
                         setNotes={setNotes}
                         setArchiveShown={setArchiveShown}

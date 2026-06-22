@@ -42,7 +42,6 @@ function App() {
 
   }, [deleteShown]);
 
-  
   return (
     <div className={`min-h-screen ${darkMode ? "bg-[#202124]" : "bg-white"}`}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} contentShown={contentShown} trashPage={trashPage} archivePage={archivePage} searchInput={searchInput} setSearchInput={setSearchInput} setFlexDir={setFlexDir} setSidebarShown={setSidebarShown} notes={notes} />

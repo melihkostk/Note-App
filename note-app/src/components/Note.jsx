@@ -41,33 +41,27 @@ export function Note(props) {
     const [editedTitle, setEditedTitle] = React.useState("");
     const [editedNote, setEditedNote] = React.useState("");
 
-    function deleteNote(id) {
-        const saved = JSON.parse(localStorage.getItem("notes")) || [];
-        const deletedNote = saved.find(note => note.id === id);
-        const remaining = saved.filter(note => note.id !== id);
-        localStorage.setItem("notes", JSON.stringify(remaining));
-        const deleted = JSON.parse(localStorage.getItem("deletedNotes")) || [];
-        props.setNotes(remaining);
-        props.setDeletedNotes([...deleted, deletedNote]);
-        localStorage.setItem("deletedNotes", JSON.stringify([...deleted, deletedNote]));
+    const deleteNote = (id) => {
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Deleted:", data)
+                props.setNotes(prev => prev.filter(note => note.id !== id));
+            })
     }
 
-    function archiveNotes(id) {
-        const saved = JSON.parse(localStorage.getItem("notes")) || [];
-        const archivedNote = saved.find(note => note.id === id);
-        const remaining = saved.filter(note => note.id !== id);
-        const archived = JSON.parse(localStorage.getItem("archivedNotes")) || [];
-        localStorage.setItem("notes", JSON.stringify(remaining));
-        localStorage.setItem("archivedNotes", JSON.stringify([...archived, archivedNote]));
-        props.setNotes(remaining);
-        props.setArchivedNotes([...archived, archivedNote]);
-    }
+    const archiveNotes = (id) => {
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/notes/${id}/archive`, {
+            method: "PATCH"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Archived:", data);
+                props.setNotes(prev => prev.filter(note => note.id !== id));
 
-    function deleteForever(id) {
-        const deleted = JSON.parse(localStorage.getItem("deletedNotes")) || [];
-        const updated = deleted.filter(note => note.id !== id);
-        props.setDeletedNotes(updated);
-        localStorage.setItem("deletedNotes", JSON.stringify(updated));
+            })
     }
 
     function restoreTrash(id) {
@@ -83,34 +77,28 @@ export function Note(props) {
         localStorage.setItem("notes", JSON.stringify(updatedNotes));
     }
 
+    function deleteForever(id) {
+       fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
+            method: "DELETE"
+        })
+        props.setDeletedNotes(prev => prev.filter(note => note.id !== id))
+    }
+
     function restoreArchive(id) {
-        const archived = JSON.parse(localStorage.getItem("archivedNotes")) || [];
-        const notes = JSON.parse(localStorage.getItem("notes")) || [];
-        const restoredNote = archived.find(note => note.id === id);
-        const updatedArchived = archived.filter(note => note.id !== id);
-        if (!restoredNote) return;
-        const updatedNotes = [...notes, restoredNote];
-        props.setArchivedNotes(updatedArchived);
-        props.setNotes(updatedNotes);
-        localStorage.setItem("notes", JSON.stringify(updatedNotes));
-        localStorage.setItem("archivedNotes", JSON.stringify(updatedArchived));
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/notes/${id}/archive`, {
+            method: "PATCH"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Archived:", data);
+                props.setArchivedNotes(prev => prev.filter(note => note.id !== id));
+                props.setNotes(prev => [...prev, data]);
+
+            })
     }
 
     function editNote(id) {
-        const saved = JSON.parse(localStorage.getItem("notes")) || [];
-
-        if (editedTitle && editedNote) {
-
-            const updated = saved.map(note =>
-                note.id === id ? { ...note, title: editedTitle, content: editedNote } : note
-            );
-
-            localStorage.setItem("notes", JSON.stringify(updated));
-            props.setNotes(updated);
-        }
-        else {
-            return
-        }
+    
     }
 
     function updateTime(id) {
@@ -214,7 +202,7 @@ export function Note(props) {
                 <div onClick={() => setNoteColor("#232427")} className={`bg-[#232427] w-8 h-8 rounded-full hover:border-2 ${props.darkMode ? "border-white" : "border-black"} cursor-pointer m-0.5`}></div>
             </div>}
             {moreShown && <div className={`flex flex-col absolute top-full left-48 ${props.darkMode ? "bg-[#202124] text-white" : "bg-white text-[#202124]"} bg-[#202124] shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] text-sm py-2 w-[228.8px] z-10`}>
-                <div onClick={() => {deleteNote(props.id); props.setDeleteShown(prev => !prev)}} className="py-1.25 pl-4.25 pr-2.5 font-semibold cursor-pointer hover:bg-[rgba(255,255,255,0.3)]">Notu sil</div>
+                <div onClick={() => { deleteNote(props.id); props.setDeleteShown(prev => !prev) }} className="py-1.25 pl-4.25 pr-2.5 font-semibold cursor-pointer hover:bg-[rgba(255,255,255,0.3)]">Notu sil</div>
                 <div
                     onClick={() => {
                         setTagMenuShown(prev => !prev);
