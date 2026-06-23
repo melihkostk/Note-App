@@ -2,21 +2,34 @@ import deleteIcon from '../assets/big-delete.png'
 import { Note } from "./Note"
 import React from "react"
 
-export function Trash({setNotes,darkMode, deletedNotes, setDeletedNotes, trashPage }) {
+export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trashPage }) {
+
+    const [id, setID] = React.useState([])
 
     React.useEffect(() => {
         fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list")
-        .then(res => res.json())
-        .then(data => {
-            setDeletedNotes(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                setDeletedNotes(data)
+                setID(data.map(item => item.id))
+            })
     }, [])
+
+    function deleteAll(){
+        id.map(item => {
+            fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${item}`, {
+                method:"DELETE"
+            })
+            .then(res => res.json())
+            .then(data => console.log("Deleted",data))
+        })
+    }
 
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="flex items-center">
                 <h1 className={`${darkMode ? "text-[#E8EAED]" : "text-[#202124]"} text-[17px] italic font-semibold`}>Çöp Kutusu'ndaki notlar 7 gün sonra silinir.</h1>
-                {deletedNotes && <a onClick={() => { setDeletedNotes(null);}} className={`${deletedNotes.length > 0 ? "block" : "hidden"} px-6 py-2 ml-4 cursor-pointer ${darkMode ? "text-[#8AB4F8]" : "text-[#1A73E8]"} font-semibold text-sm`}>Çöp Kutusunu boşalt</a>}
+                {deletedNotes && <a onClick={() => {setDeletedNotes(null); deleteAll() }} className={`${deletedNotes.length > 0 ? "block" : "hidden"} px-6 py-2 ml-4 cursor-pointer ${darkMode ? "text-[#8AB4F8]" : "text-[#1A73E8]"} font-semibold text-sm`}>Çöp Kutusunu boşalt</a>}
             </div>
             {deletedNotes && deletedNotes.length === 0 && <div className='flex flex-col items-center mt-[20vh]'>
                 <img className='w-30 h-30 object-cover m-5' src={deleteIcon} alt="" />

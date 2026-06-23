@@ -64,14 +64,13 @@ export function Note(props) {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("Archived:", data);
                 props.setNotes(prev => prev.filter(note => note.id !== id));
                 props.setArchivedNotes(prev => [...prev, data])
             })
     }
 
     function restoreTrash() {
-
+         
     }
 
     function deleteForever(id) {
