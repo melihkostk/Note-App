@@ -54,7 +54,10 @@ export function Note(props) {
 
     const archiveNotes = (id) => {
         fetch(`https://demo.pigasoft.com/intern/melih-kostak/notes/${id}/archive`, {
-            method: "PATCH"
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
         })
             .then(res => res.json())
             .then(data => {
@@ -65,20 +68,11 @@ export function Note(props) {
     }
 
     function restoreTrash(id) {
-        const saved = JSON.parse(localStorage.getItem("notes")) || [];
-        const deleted = JSON.parse(localStorage.getItem("deletedNotes")) || [];
-        const restored = deleted.find(note => note.id === id);
-        const remaining = deleted.filter(note => note.id !== id);
-        if (!restored) return;
-        const updatedNotes = [...saved, restored];
-        props.setDeletedNotes(remaining);
-        props.setNotes(updatedNotes);
-        localStorage.setItem("deletedNotes", JSON.stringify(remaining));
-        localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        
     }
 
     function deleteForever(id) {
-       fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
             method: "DELETE"
         })
         props.setDeletedNotes(prev => prev.filter(note => note.id !== id))
@@ -98,7 +92,29 @@ export function Note(props) {
     }
 
     function editNote(id) {
-    
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: editedTitle,
+                description: editedNote
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Edited", data);
+
+                props.setNotes(prev =>
+                    prev.map(item =>
+                        item.id === id
+                            ? data
+                            : item
+                    )
+                );
+            })
+            .catch(err => console.error(err));
     }
 
     function updateTime(id) {

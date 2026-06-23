@@ -56,6 +56,8 @@ export function Content({ setDeleteShown, editedNotes, setEditedNotes, darkMode,
             createdAt: `${date.getHours()}:${date.getMinutes()}`
         };
 
+        setNotes(prev => [...prev, newNote]);
+
         fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes", {
             method: "POST",
             headers: {
@@ -65,7 +67,7 @@ export function Content({ setDeleteShown, editedNotes, setEditedNotes, darkMode,
         })
             .then(res => res.json())
             .then(data => {
-                setNotes(prev => [...prev, data]);
+                console.log("Added", data)
 
                 setTitle("");
                 setDescription("");
@@ -174,9 +176,9 @@ export function Content({ setDeleteShown, editedNotes, setEditedNotes, darkMode,
                 <div className="text-[#9AA0A6] text-[22px]">Eklediğiniz notlar burada görünür</div>
             </div>}
             {notes && notes.length > 0 && <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6 max-w-260`}>
-                {notes.filter((item) => { return searchInput.toLowerCase() === "" ? item : item.content.toLowerCase().includes(searchInput) }).map((n) => (
+                {notes.filter((item) => { return searchInput.toLowerCase() === "" ? item : item.description.toLowerCase().includes(searchInput) }).map((n, index) => (
                     <Note
-                        key={n.id}
+                        key={n.id ?? index}
                         id={n.id}
                         title={n.title}
                         note={n.description}
