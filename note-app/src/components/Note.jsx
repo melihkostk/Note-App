@@ -53,22 +53,25 @@ export function Note(props) {
     }
 
     const archiveNotes = (id) => {
-        fetch(`https://demo.pigasoft.com/intern/melih-kostak/notes/${id}/archive`, {
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}/archive`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
+            body: JSON.stringify ({
+                is_archived: true
+            })
         })
             .then(res => res.json())
             .then(data => {
                 console.log("Archived:", data);
                 props.setNotes(prev => prev.filter(note => note.id !== id));
-
+                props.setArchivedNotes(prev => [...prev, data])
             })
     }
 
-    function restoreTrash(id) {
-        
+    function restoreTrash() {
+
     }
 
     function deleteForever(id) {
@@ -79,15 +82,20 @@ export function Note(props) {
     }
 
     function restoreArchive(id) {
-        fetch(`https://demo.pigasoft.com/intern/melih-kostak/notes/${id}/archive`, {
-            method: "PATCH"
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}/archive`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify ({
+                is_archived: false
+            })
         })
             .then(res => res.json())
             .then(data => {
-                console.log("Archived:", data);
-                props.setArchivedNotes(prev => prev.filter(note => note.id !== id));
-                props.setNotes(prev => [...prev, data]);
-
+                console.log("Unarchived :", data);
+                props.setNotes(prev => [...prev, data])
+                props.setArchivedNotes(prev => prev.filter(note => note.id !== id))
             })
     }
 
@@ -109,7 +117,11 @@ export function Note(props) {
                 props.setNotes(prev =>
                     prev.map(item =>
                         item.id === id
-                            ? data
+                            ? {
+                                ...item,
+                                title: editedTitle,
+                                description: editedNote
+                            }
                             : item
                     )
                 );
