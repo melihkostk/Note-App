@@ -314,7 +314,7 @@ export function Note(props) {
                 </div>
             </div>}
             {props.trashPage && <div className={`flex ${isShown ? "visible" : "invisible"} items-start px-4 py-3 `}>
-                <div onClick={() => deleteForever(props.id)} className="flex items-center justify-center rounded-full">
+                <div onClick={() => {deleteForever(props.id); props.setDeletePShown(true)}} className="flex items-center justify-center rounded-full">
                     <img className="pr-2 cursor-pointer" src={props.darkMode ? deleteForeverIcon : darkDelete} alt="" title="Tamamıyla sil" />
                 </div>
                 <div className="flex items-center justify-center rounded-full">

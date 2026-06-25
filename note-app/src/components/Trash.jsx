@@ -2,7 +2,7 @@ import deleteIcon from '../assets/big-delete.png'
 import { Note } from "./Note"
 import React from "react"
 
-export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trashPage }) {
+export function Trash({setDeletePShown, setNotes, darkMode, deletedNotes, setDeletedNotes, trashPage }) {
 
     const [id, setID] = React.useState([])
     const [deleteWarning, setDeleteWarning] = React.useState(false);
@@ -54,6 +54,7 @@ export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trash
                         setDeletedNotes={setDeletedNotes}
                         setNotes={setNotes}
                         darkMode={darkMode}
+                        setDeletePShown={setDeletePShown}
                     />
                 ))}
             </div>}

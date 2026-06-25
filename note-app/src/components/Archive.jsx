@@ -13,15 +13,6 @@ export function Archive({ setUnArchiveShown, darkMode, archivedNotes, setArchive
             })
     }, [])
 
-    React.useEffect(() => {
-        const interval = setInterval(() => {
-            setUnArchiveShown(false);
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-
     return (
         <>
             {archivedNotes && archivedNotes.length === 0 && <div className='flex flex-col items-center justify-center mt-[20vh]'>

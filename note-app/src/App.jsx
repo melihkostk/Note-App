@@ -17,6 +17,7 @@ function App() {
   const [img, setImg] = React.useState("")
   const [archiveShown, setArchiveShown] = React.useState(false)
   const [unArchiveShown, setUnArchiveShown] = React.useState(false)
+  const [deletePShown, setDeletePShown] = React.useState(false);
   const [deleteShown, setDeleteShown] = React.useState(false)
   const [contentShown, setContentShown] = React.useState(true)
   const [archivePage, setArchivePage] = React.useState(false)
@@ -39,9 +40,27 @@ function App() {
       setDeleteShown(false);
     }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(timer);
 
   }, [deleteShown]);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setUnArchiveShown(false);
+    }, 3000);
+
+     return () => clearInterval(timer);
+
+  }, [unArchiveShown]);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setDeletePShown(false);
+    }, 3000);
+
+     return () => clearInterval(timer);
+
+  }, [deletePShown]);
 
   return (
     <div className={`min-h-screen ${darkMode ? "bg-[#202124]" : "bg-white"}`}>
@@ -56,7 +75,7 @@ function App() {
           />
         </div>}
         {trashPage && <div className='w-full flex flex-col items-center mt-8'>
-          <Trash darkMode={darkMode} setNotes={setNotes} trashPage={trashPage} deletedNotes={deletedNotes} setDeletedNotes={setDeletedNotes}
+          <Trash setDeletePShown={setDeletePShown} darkMode={darkMode} setNotes={setNotes} trashPage={trashPage} deletedNotes={deletedNotes} setDeletedNotes={setDeletedNotes}
           />
         </div>}
       </div>
@@ -95,7 +114,20 @@ function App() {
             Geri al
           </div>
           <div>
-            <img className='cursor-pointer' onClick={() => setDeleteShown(prev => !prev)} src={closeIcon} alt="" />
+            <img className='cursor-pointer' onClick={() => setUnArchiveShown(prev => !prev)} src={closeIcon} alt="" />
+          </div>
+        </div>
+      </div>}
+      {deletePShown && <div className='flex justify-between items-center bg-[#313235] w-[30%] pl-5 pr-2.5 py-2.5 fixed bottom-5 left-5'>
+        <div className='text-white text-sm font-semibold'>
+          Not silindi
+        </div>
+        <div className='flex items-center'>
+          <div className='text-[#8ab4f8] font-semibold text-sm px-6 py-2'>
+            Geri al
+          </div>
+          <div>
+            <img className='cursor-pointer' onClick={() => setDeletePShown(prev => !prev)} src={closeIcon} alt="" />
           </div>
         </div>
       </div>}
