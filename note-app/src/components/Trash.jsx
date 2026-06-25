@@ -16,14 +16,14 @@ export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trash
             })
     }, [])
 
-    function deleteAll(){
+    function deleteAll() {
         id.map(item => {
             fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${item}`, {
-                method:"DELETE"
+                method: "DELETE"
             })
-            .then(res => res.json())
-            .then(data => console.log("Deleted",data))
-            setDeletedNotes(null)
+                .then(res => res.json())
+                .then(data => console.log("Deleted", data))
+            setDeletedNotes([])
         })
     }
 
@@ -57,20 +57,20 @@ export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trash
                     />
                 ))}
             </div>}
-            {deleteWarning && <div className='flex flex-col bg-[#313235] fixed top-60 p-6 shadow-[0_1px_3px_0_rgba(0,0,0,0.6),0_4px_8px_3px_rgba(0,0,0,0.3)] rounded-lg'>
-                <div className='text-[#E8EAED] text-sm font-semibold pb-6'>
+            {deleteWarning && <div className={`flex flex-col ${darkMode ? "bg-[#313235]" : "bg-[#ffffff]"} fixed top-60 p-6 shadow-[0_1px_3px_0_rgba(0,0,0,0.6),0_4px_8px_3px_rgba(0,0,0,0.3)] rounded-lg`}>
+                <div className={`${darkMode ? "text-[#E8EAED]" : "text-[#3C4043]"} text-sm font-semibold pb-6`}>
                     Çöp kutusu boşaltılsın mı?  Çöp Kutusu'ndaki tüm notlar kalıcı olarak silinecektir.
                 </div>
                 <div className='flex items-center justify-end'>
-                    <div onClick={() => setDeleteWarning(false)} className='text-[#E8EAED] text-sm font-semibold py-2 px-6 mr-4 cursor-pointer'>
+                    <div onClick={() => setDeleteWarning(false)} className={`${darkMode ? "text-[#E8EAED]" : "text-[#000000DE]"} text-sm font-semibold py-2 px-6 mr-4 cursor-pointer`}>
                         İptal
                     </div>
-                    <div onClick={() => {deleteAll(); setDeleteWarning(false)}} className='text-sm font-semibold py-2 px-6 text-[#8ab4f8] cursor-pointer'>
+                    <div onClick={() => { deleteAll(); setDeleteWarning(false) }} className={`${darkMode ? "text-[#8ab4f8]" : "text-[#1A73E8]"} text-sm font-semibold py-2 px-6 cursor-pointer`} >
                         Çöp Kutusu'nu boşalt
-                    </div>
                 </div>
+            </div>
             </div>}
-        </div>
+        </div >
     )
 
 
