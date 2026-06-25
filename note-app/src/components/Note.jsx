@@ -303,6 +303,7 @@ export function Note(props) {
                     {props.archivePage && <img
                         onClick={() => {
                             restoreArchive(props.id)
+                            props.setUnArchiveShown(true);
                         }
                         }
                         className="h-5 w-5 cursor-pointer" src={props.darkMode ? archIcon : darkArch} alt="" title="Arşivden çıkar"

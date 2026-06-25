@@ -3,7 +3,7 @@ import archiveIcon from "../assets/big-archive.png"
 import { Note } from "./Note";
 import React from "react";
 
-export function Archive({ darkMode, archivedNotes, setArchivedNotes, archivePage, restoreArchive, setNotes }) {
+export function Archive({ setUnArchiveShown, darkMode, archivedNotes, setArchivedNotes, archivePage, restoreArchive, setNotes }) {
 
     React.useEffect(() => {
         fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/archived/list")
@@ -13,6 +13,14 @@ export function Archive({ darkMode, archivedNotes, setArchivedNotes, archivePage
             })
     }, [])
 
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            setUnArchiveShown(false);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, []);
+
 
     return (
         <>
@@ -21,7 +29,7 @@ export function Archive({ darkMode, archivedNotes, setArchivedNotes, archivePage
                 <div className='text-[22px] text-[#9AA0A6] text-center'>Arşivlenen notlarınız burada görünür</div>
             </div>}
             <div className="flex items-start justify-center gap-3 w-full mt-8 max-w-260 flex-wrap">
-                {archivedNotes.map((n , index) => (
+                {archivedNotes.map((n, index) => (
                     <Note
                         key={n.id ?? index}
                         id={n.id}
@@ -38,6 +46,7 @@ export function Archive({ darkMode, archivedNotes, setArchivedNotes, archivePage
                         restoreArchive={restoreArchive}
                         setNotes={setNotes}
                         darkMode={darkMode}
+                        setUnArchiveShown={setUnArchiveShown}
                     />
                 ))}
             </div>
