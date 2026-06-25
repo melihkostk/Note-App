@@ -94,10 +94,10 @@ export function Content({setUnArchiveShown, setDeleteShown, editedNotes, setEdit
 
     return (
         <div className="flex flex-col items-center w-full">
-            {!isShown && <div onClick={() => setIsShown(true)} className={`${darkMode ? "text-[#e8eaed] border border-[#5f6368]" : "text-[#202124] border border-gray-200"} w-1/2 py-2.5 px-4 mt-8 rounded-md cursor-text shadow-[0_1px_3px_rgba(0,0,0,0.12)]`}>
+            {!isShown && <div onClick={() => setIsShown(true)} className={`${darkMode ? "text-[#e8eaed] border border-[#5f6368]" : "text-[#202124] border border-gray-200"} w-1/2 py-2.5 px-4 mt-8 rounded-md cursor-text shadow-[0_1px_3px_rgba(0,0,0,0.12)] min-w-60`}>
                 Not alın...
             </div>}
-            {isShown && <div className={`border ${darkMode ? "border-[#5f6368]" : "border-[#e0e0e0]"} border-[#5f6368] shadow-[0_4px_12px_rgba(0,0,0,0.25)] w-1/2 rounded-xl mt-8`}>
+            {isShown && <div className={`border ${darkMode ? "border-[#5f6368]" : "border-[#e0e0e0]"} border-[#5f6368] shadow-[0_4px_12px_rgba(0,0,0,0.25)] w-1/2 rounded-xl mt-8 min-w-60`}>
                 {img && <div className="flex flex-col items-center justify-center">
                     <img className="w-full" src={img} alt="" />
                     <img onClick={() => setImg("")} className="self-end px-4 cursor-pointer" src={deleteIcon} alt="" />

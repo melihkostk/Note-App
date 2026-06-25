@@ -3,6 +3,7 @@ import listIcon from '../assets/list.png'
 import settingsIcon from '../assets/settings.png'
 import appIcon from '../assets/apps.png'
 import menuIcon from '../assets/menu.png'
+import searchIcon from '../assets/search.png'
 import React from 'react'
 import driveIcon from '../assets/google-drive.png'
 import gmailIcon from '../assets/gmail.png'
@@ -15,26 +16,36 @@ import photosIcon from '../assets/google-photos.png'
 import meetIcon from '../assets/meet.png'
 
 
-export function Header({ darkMode,setDarkMode,setFlexDir, setSidebarShown ,setSearchInput, archivePage, contentShown, trashPage}) {
+export function Header({ darkMode, setDarkMode, setFlexDir, setSidebarShown, setSearchInput, archivePage, contentShown, trashPage }) {
 
     const [showSettings, setShowSettings] = React.useState(false);
     const [showApps, setShowApps] = React.useState(false);
+    const [searchShown, setSearchShown] = React.useState(false);
 
     return (
         <header className={`p-2 border-b max-[600px]:py-1 ${darkMode ? "border-[#5f6368]" : "border-[#e0e0e0]"}`}>
             <div className='flex items-center justify-between'>
-                {contentShown && <div className="flex items-center gap-2 cursor-pointer">
-                    <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" title='Ana menü' />
-                    <img className='w-10 h-10' src="https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web-48dp/logo_keep_2026_color_1x_web_48dp.png" alt="" />
-                    <span className={`text-[22px] ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} `}>Keep</span>
-                </div>}
-                {archivePage && <div className="flex items-center gap-2 cursor-pointer">
-                    <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
-                    <span className={`text-xl ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} font-semibold`}>Arşiv</span>
-                </div>}
-                {trashPage && <div className="flex items-center gap-2 cursor-pointer">
-                    <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
-                    <span className={`text-xl ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} font-semibold`}>Çöp Kutusu</span>
+                <div>
+                    {!searchShown && <div>
+                        {contentShown && <div className="flex items-center gap-2 cursor-pointer">
+                            <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" title='Ana menü' />
+                            <img className='w-10 h-10' src="https://www.gstatic.com/images/branding/productlogos/keep_2026/v2/web-48dp/logo_keep_2026_color_1x_web_48dp.png" alt="" />
+                            <span className={`text-[22px] ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} `}>Keep</span>
+                        </div>}
+                        {archivePage && <div className="flex items-center gap-2 cursor-pointer">
+                            <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
+                            <span className={`text-xl ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} font-semibold`}>Arşiv</span>
+                        </div>}
+                        {trashPage && <div className="flex items-center gap-2 cursor-pointer">
+                            <img onClick={() => setSidebarShown(prev => !prev)} className='p-3 hover:bg-[rgba(154,160,166,0.157)] cursor-pointer rounded-full' src={menuIcon} alt="" />
+                            <span className={`text-xl ${darkMode ? "text-[#E3E3E3]" : "text-[#282A2C]"} font-semibold`}>Çöp Kutusu</span>
+                        </div>}
+                    </div>}
+                </div>
+                {searchShown && <div className='w-6/10'>
+                    <input
+                        onChange={(e) => setSearchInput(e.target.value)}
+                        className='bg-white w-full h-full p-3 rounded-lg text-[#1f1f1f] shadow-[inset_1px_1px_0_rgba(0,0,0,0.25),inset_0_-1px_0_rgba(0,0,0,0.2)]' type="text" placeholder='Arama yapın' />
                 </div>}
                 <div className='w-6/10 flex items-center justify-center max-md:hidden'>
                     <input
@@ -45,15 +56,20 @@ export function Header({ darkMode,setDarkMode,setFlexDir, setSidebarShown ,setSe
                     />
                 </div>
                 <div className='flex items-center gap-0.5'>
-                    <img onClick={() => location.reload()} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full w-12 h-12' src={refreshIcon} alt="refresh icon" title='Yenile' />
+                    <div className='md:hidden'>
+                        <img onClick={() => setSearchShown(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full w-12 h-12' src={searchIcon} alt="" />
+                    </div>
                     <div>
+                        <img onClick={() => location.reload()} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full w-12 h-12' src={refreshIcon} alt="refresh icon" title='Yenile' />
+                    </div>
+                    <div className='max-[600px]:hidden'>
                         <img onClick={() => setFlexDir(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer rounded-full w-12 h-12' src={listIcon} alt="list icon" title='Liste görünümü' />
                     </div>
                     <div className='relative'>
                         <img onClick={() => setShowSettings(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer w-12 h-12 rounded-full' src={settingsIcon} alt="settings icon" title='Ayarlar' />
                         {showSettings && <div className={`flex flex-col ${darkMode ? "bg-[#202124] text-white" : "bg-white text-[#3C4043]"} shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] absolute w-[208.5px] right-0 py-1.5 z-10`}>
                             <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)] ' href="">Ayarlar</a>
-                            <a onClick={()=>setDarkMode(prev => !prev)} className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)] cursor-pointer'>{darkMode ? "Koyu temayı devre dışı bırak" : "Koyu temayı etkinleştir"}</a>
+                            <a onClick={() => setDarkMode(prev => !prev)} className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)] cursor-pointer'>{darkMode ? "Koyu temayı devre dışı bırak" : "Koyu temayı etkinleştir"}</a>
                             <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Geri Bildirim Gönder</a>
                             <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="https://support.google.com/keep/#topic=6262468" target='_blank'>Yardım</a>
                             <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Uygulama indirme işlemleri</a>
