@@ -5,6 +5,7 @@ import React from "react"
 export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trashPage }) {
 
     const [id, setID] = React.useState([])
+    const [deleteWarning, setDeleteWarning] = React.useState(false);
 
     React.useEffect(() => {
         fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list")
@@ -22,6 +23,7 @@ export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trash
             })
             .then(res => res.json())
             .then(data => console.log("Deleted",data))
+            setDeletedNotes(null)
         })
     }
 
@@ -29,7 +31,7 @@ export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trash
         <div className="flex flex-col items-center justify-center">
             <div className="flex items-center">
                 <h1 className={`${darkMode ? "text-[#E8EAED]" : "text-[#202124]"} text-[17px] italic font-semibold`}>Çöp Kutusu'ndaki notlar 7 gün sonra silinir.</h1>
-                {deletedNotes && <a onClick={() => {setDeletedNotes(null); deleteAll() }} className={`${deletedNotes.length > 0 ? "block" : "hidden"} px-6 py-2 ml-4 cursor-pointer ${darkMode ? "text-[#8AB4F8]" : "text-[#1A73E8]"} font-semibold text-sm`}>Çöp Kutusunu boşalt</a>}
+                {deletedNotes && <a onClick={() => setDeleteWarning(true)} className={`${deletedNotes.length > 0 ? "block" : "hidden"} px-6 py-2 ml-4 cursor-pointer ${darkMode ? "text-[#8AB4F8]" : "text-[#1A73E8]"} font-semibold text-sm`}>Çöp Kutusunu boşalt</a>}
             </div>
             {deletedNotes && deletedNotes.length === 0 && <div className='flex flex-col items-center mt-[20vh]'>
                 <img className='w-30 h-30 object-cover m-5' src={deleteIcon} alt="" />
@@ -54,6 +56,19 @@ export function Trash({ setNotes, darkMode, deletedNotes, setDeletedNotes, trash
                         darkMode={darkMode}
                     />
                 ))}
+            </div>}
+            {deleteWarning && <div className='flex flex-col bg-[#313235] fixed top-60 p-6 shadow-[0_1px_3px_0_rgba(0,0,0,0.6),0_4px_8px_3px_rgba(0,0,0,0.3)] rounded-lg'>
+                <div className='text-[#E8EAED] text-sm font-semibold pb-6'>
+                    Çöp kutusu boşaltılsın mı?  Çöp Kutusu'ndaki tüm notlar kalıcı olarak silinecektir.
+                </div>
+                <div className='flex items-center justify-end'>
+                    <div onClick={() => setDeleteWarning(false)} className='text-[#E8EAED] text-sm font-semibold py-2 px-6 mr-4 cursor-pointer'>
+                        İptal
+                    </div>
+                    <div onClick={() => {deleteAll(); setDeleteWarning(false)}} className='text-sm font-semibold py-2 px-6 text-[#8ab4f8] cursor-pointer'>
+                        Çöp Kutusu'nu boşalt
+                    </div>
+                </div>
             </div>}
         </div>
     )

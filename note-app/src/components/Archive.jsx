@@ -18,7 +18,7 @@ export function Archive({ darkMode, archivedNotes, setArchivedNotes, archivePage
         <>
             {archivedNotes && archivedNotes.length === 0 && <div className='flex flex-col items-center justify-center mt-[20vh]'>
                 <img className='w-30 h-30 m-5' src={archiveIcon} alt="" />
-                <div className='text-[22px] text-[#9AA0A6]'>Arşivlenen notlarınız burada görünür</div>
+                <div className='text-[22px] text-[#9AA0A6] text-center'>Arşivlenen notlarınız burada görünür</div>
             </div>}
             <div className="flex items-start justify-center gap-3 w-full mt-8 max-w-260 flex-wrap">
                 {archivedNotes.map((n , index) => (

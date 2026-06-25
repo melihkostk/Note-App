@@ -174,7 +174,7 @@ export function Content({ setDeleteShown, editedNotes, setEditedNotes, darkMode,
                 <img className="w-30 h-30 m-5" src={lambIcon} alt="" />
                 <div className="text-[#9AA0A6] text-[22px]">Eklediğiniz notlar burada görünür</div>
             </div>}
-            {notes && notes.length > 0 && <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-start gap-3 mt-6 max-w-260`}>
+            {notes && notes.length > 0 && <div className={`flex ${flexDir ? "flex-row" : "flex-col"} flex-wrap justify-center gap-3 mt-6 max-w-260`}>
                 {notes.filter((item) => { return searchInput.toLowerCase() === "" ? item : item.description.toLowerCase().includes(searchInput) }).map((n, index) => (
                     <Note
                         key={n.id ?? index}
