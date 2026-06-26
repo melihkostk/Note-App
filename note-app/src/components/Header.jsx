@@ -76,12 +76,12 @@ export function Header({ darkMode, setDarkMode, setFlexDir, setSidebarShown, set
                     <div className='relative'>
                         <img onClick={() => setShowSettings(prev => !prev)} className='hover:bg-[rgba(154,160,166,0.157)] p-3 cursor-pointer w-12 h-12 rounded-full' src={settingsIcon} alt="settings icon" title='Ayarlar' />
                         {showSettings && <div className={`flex flex-col ${darkMode ? "bg-[#202124] text-white" : "bg-white text-[#3C4043]"} shadow-[0_1px_2px_0_rgba(0,0,0,0.6),0_2px_6px_2px_rgba(0,0,0,0.3)] absolute w-[208.5px] right-0 py-1.5 z-10`}>
-                            <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)] ' href="">Ayarlar</a>
-                            <a onClick={() => setDarkMode(prev => !prev)} className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)] cursor-pointer'>{darkMode ? "Koyu temayı devre dışı bırak" : "Koyu temayı etkinleştir"}</a>
-                            <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Geri Bildirim Gönder</a>
-                            <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="https://support.google.com/keep/#topic=6262468" target='_blank'>Yardım</a>
-                            <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Uygulama indirme işlemleri</a>
-                            <a className='hover:underline py-1.25 pl-4.25 pr-2.5 text-sm font-semibold hover:bg-[rgba(255,255,255,0.3)]' href="">Klavye kısayolları</a>
+                            <a className={`py-1.25 pl-4.25 pr-2.5 text-sm font-semibold ${darkMode ? "hover:bg-[rgba(255,255,255,0.3)]" : "hover:bg-[#f1f3f4]"}`} href="">Ayarlar</a>
+                            <a onClick={() => setDarkMode(prev => !prev)} className={`py-1.25 pl-4.25 pr-2.5 cursor-pointer text-sm font-semibold ${darkMode ? "hover:bg-[rgba(255,255,255,0.3)]" : "hover:bg-[#f1f3f4]"}`}>{darkMode ? "Koyu temayı devre dışı bırak" : "Koyu temayı etkinleştir"}</a>
+                            <a className={`py-1.25 pl-4.25 pr-2.5 text-sm font-semibold ${darkMode ? "hover:bg-[rgba(255,255,255,0.3)]" : "hover:bg-[#f1f3f4]"}`} href="">Geri Bildirim Gönder</a>
+                            <a className={`py-1.25 pl-4.25 pr-2.5 text-sm font-semibold ${darkMode ? "hover:bg-[rgba(255,255,255,0.3)]" : "hover:bg-[#f1f3f4]"}`} href="https://support.google.com/keep/#topic=6262468" target='_blank'>Yardım</a>
+                            <a className={`py-1.25 pl-4.25 pr-2.5 text-sm font-semibold ${darkMode ? "hover:bg-[rgba(255,255,255,0.3)]" : "hover:bg-[#f1f3f4]"}`} href="">Uygulama indirme işlemleri</a>
+                            <a className={`py-1.25 pl-4.25 pr-2.5 text-sm font-semibold ${darkMode ? "hover:bg-[rgba(255,255,255,0.3)]" : "hover:bg-[#f1f3f4]"}`} href="">Klavye kısayolları</a>
                         </div>}
                     </div>
                     <div className='relative'>
