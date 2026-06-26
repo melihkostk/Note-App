@@ -158,7 +158,7 @@ export function Note(props) {
                     <input onChange={(e) => setEditedTitle(e.target.value)} className={`${props.darkMode ? "text-white" : "text-[#202124]"} focus:outline-none w-full`} type="text" value={editedTitle} />
                 </div>
                 <div className="px-4 py-3 text-wrap">
-                    <div className={`wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.isH1 ? "text-xl" : ""} ${props.isH2 ? "text-lg" : ""} `}>
+                    <div className={`wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.fontSize === "20" ? "text-xl" : ""} ${props.fontSize === "18" ? "text-lg" : ""} ${props.fontSize === "16" ? "text-base" : ""} `}>
                         <input onChange={(e) => setEditedNote(e.target.value)} className={`${props.darkMode ? "text-white" : "text-[#202124]"} focus:outline-none w-full`} type="text" value={editedNote} />
                     </div>
                 </div>
@@ -194,7 +194,7 @@ export function Note(props) {
                 </h1>
             </div>
             <div className="px-4 py-3 text-wrap">
-                <p className={`${props.darkMode ? "text-white" : "text-[#202124]"} wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.isH1 ? "text-xl" : ""} ${props.isH2 ? "text-lg" : ""} `}>
+                <p className={`${props.darkMode ? "text-white" : "text-[#202124]"} wrap-break-word w-full ${props.isBold ? "font-bold" : ""} ${props.isItalic ? "italic" : ""} ${props.hasUnderline ? "underline" : ""} ${props.fontSize === "20" ? "text-xl" : ""} ${props.fontSize === "18" ? "text-lg" : ""} ${props.fontSize === "16" ? "text-base" : ""} `}>
                     {props.note}
                 </p>
             </div>

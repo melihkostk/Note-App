@@ -33,8 +33,7 @@ export function Content({setUnArchiveShown, setDeleteShown, editedNotes, setEdit
     const [isBold, setIsBold] = React.useState(false)
     const [isItalic, setIsItalic] = React.useState(false)
     const [hasUnderline, setHasUnderline] = React.useState(false)
-    const [isH1, setIsH1] = React.useState(false)
-    const [isH2, setIsH2] = React.useState(false)
+    const [fontSize, setFontSize] = React.useState("16")
 
     let date = new Date();
 
@@ -51,8 +50,7 @@ export function Content({setUnArchiveShown, setDeleteShown, editedNotes, setEdit
             is_bold : isBold,
             is_italic : isItalic,
             hasUnderline,
-            isH1,
-            isH2,
+            font_size : fontSize,
             createdAt: `${date.getHours()}:${date.getMinutes()}`
         };
 
@@ -107,21 +105,20 @@ export function Content({setUnArchiveShown, setDeleteShown, editedNotes, setEdit
                     <img className="hover:bg-[rgba(154,160,166,0.157)] rounded-full cursor-pointer" src={keepIcon} alt="" />
                 </div>
                 <div className="px-4 py-3">
-                    <input value={description} onChange={(e) => setDescription(e.target.value)} className={`${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${hasUnderline ? "underline" : ""} ${isH1 ? "text-xl" : ""} ${isH2 ? "text-lg" : ""} ${darkMode ? "placeholder-white text-white" : "placeholder-[#202124] text-[#202124]"}  placeholder:text-[16px] w-full focus:outline-none`} type="text" placeholder="Not alın..." name="not" id="note" />
+                    <input value={description} onChange={(e) => setDescription(e.target.value)} className={`${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${hasUnderline ? "underline" : ""} ${fontSize === "20" ? "text-xl" : ""} ${fontSize === "18" ? "text-lg" : ""} ${fontSize === "16" ? "text-base" : ""} ${darkMode ? "placeholder-white text-white" : "placeholder-[#202124] text-[#202124]"}  placeholder:text-[16px] w-full focus:outline-none`} type="text" placeholder="Not alın..." name="not" id="note" />
                 </div>
                 {formatShown && <div className="flex items-center px-0.5 shadow-[0_1px_3px_1px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] mx-2 w-max">
                     <div className="flex border-r border-[#5f6368]">
                         <div>
-                            <img onClick={() => setIsH1(prev => !prev)} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? h1 : blackH1} alt="" />
+                            <img onClick={() => setFontSize("20")} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? h1 : blackH1} alt="" />
                         </div>
                         <div>
-                            <img onClick={() => setIsH2(prev => !prev)} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? h2 : blackH2} alt="" />
+                            <img onClick={() => setFontSize("18")} className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? h2 : blackH2} alt="" />
                         </div>
                         <div>
                             <img
                                 onClick={() => {
-                                    setIsH1(false);
-                                    setIsH2(false);
+                                    setFontSize("16")
                                 }}
                                 className={`p-2 cursor-pointer ${darkMode ? "hover:bg-[#282A2C]" : "hover:bg-[#5f636828]"} rounded-full`} src={darkMode ? normal : blackNormal} alt=""
                             />
@@ -185,8 +182,7 @@ export function Content({setUnArchiveShown, setDeleteShown, editedNotes, setEdit
                         isBold={n.is_bold}
                         isItalic={n.is_italic}
                         hasUnderline={n.hasUnderline}
-                        isH1={n.isH1}
-                        isH2={n.isH2}
+                        fontSize={n.font_size}
                         setContent={setDescription}
                         setTitle={setTitle}
                         setNotes={setNotes}
