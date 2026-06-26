@@ -14,6 +14,8 @@ import calendarIcon from '../assets/google-calendar.png'
 import newsIcon from '../assets/news.png'
 import photosIcon from '../assets/google-photos.png'
 import meetIcon from '../assets/meet.png'
+import backArrow from '../assets/back-arrow.png'
+import darkClose from "../assets/dark-close.png"
 
 
 export function Header({ darkMode, setDarkMode, setFlexDir, setSidebarShown, setSearchInput, archivePage, contentShown, trashPage }) {
@@ -42,10 +44,16 @@ export function Header({ darkMode, setDarkMode, setFlexDir, setSidebarShown, set
                         </div>}
                     </div>}
                 </div>
-                {searchShown && <div className='w-6/10'>
+                {searchShown && <div className='w-6/10 relative md:hidden'>
+                    <img className='absolute top-3 left-3 cursor-pointer' src={backArrow} alt="" />
                     <input
                         onChange={(e) => setSearchInput(e.target.value)}
-                        className='bg-white w-full h-full p-3 rounded-lg text-[#1f1f1f] shadow-[inset_1px_1px_0_rgba(0,0,0,0.25),inset_0_-1px_0_rgba(0,0,0,0.2)]' type="text" placeholder='Arama yapın' />
+                        className='bg-white w-full h-full p-3 pl-12 rounded-lg placeholder:text-[#1f1f1f] text-[#1f1f1f] shadow-[inset_1px_1px_0_rgba(0,0,0,0.25),inset_0_-1px_0_rgba(0,0,0,0.2)]' type="text" placeholder='Arama yapın' 
+                    />
+                    <img
+                        onClick={() => setSearchShown(false)}
+                        className='absolute right-3 top-3' src={darkClose} alt="" />
+
                 </div>}
                 <div className='w-6/10 flex items-center justify-center max-md:hidden'>
                     <input

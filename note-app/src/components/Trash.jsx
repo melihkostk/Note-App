@@ -2,7 +2,7 @@ import deleteIcon from '../assets/big-delete.png'
 import { Note } from "./Note"
 import React from "react"
 
-export function Trash({setDeletePShown, setNotes, darkMode, deletedNotes, setDeletedNotes, trashPage }) {
+export function Trash({searchInput,setDeletePShown, setNotes, darkMode, deletedNotes, setDeletedNotes, trashPage }) {
 
     const [id, setID] = React.useState([])
     const [deleteWarning, setDeleteWarning] = React.useState(false);
@@ -38,9 +38,9 @@ export function Trash({setDeletePShown, setNotes, darkMode, deletedNotes, setDel
                 <div className='text-[22px] text-[#9AA0A6]'>Çöp Kutusu'nda not yok</div>
             </div>}
             {deletedNotes && deletedNotes.length > 0 && <div className="flex items-start justify-center gap-3 w-full mt-8 flex-wrap max-w-260">
-                {deletedNotes.map((n) => (
+                {deletedNotes.filter((item) => { return searchInput.toLowerCase() === "" ? item : item.description.toLowerCase().includes(searchInput) }).map((n, index) => (
                     <Note
-                        key={n.id}
+                        key={n.id ?? index}
                         id={n.id}
                         title={n.title}
                         note={n.description}
