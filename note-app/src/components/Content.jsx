@@ -48,8 +48,8 @@ export function Content({setUnArchiveShown, setDeleteShown, editedNotes, setEdit
             title,
             description,
             img,
-            isBold,
-            isItalic,
+            is_bold : isBold,
+            is_italic : isItalic,
             hasUnderline,
             isH1,
             isH2,
@@ -182,8 +182,8 @@ export function Content({setUnArchiveShown, setDeleteShown, editedNotes, setEdit
                         title={n.title}
                         note={n.description}
                         img={n.img}
-                        isBold={n.isBold}
-                        isItalic={n.isItalic}
+                        isBold={n.is_bold}
+                        isItalic={n.is_italic}
                         hasUnderline={n.hasUnderline}
                         isH1={n.isH1}
                         isH2={n.isH2}
