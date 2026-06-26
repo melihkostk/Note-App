@@ -58,7 +58,7 @@ export function Header({ darkMode, setDarkMode, setFlexDir, setSidebarShown, set
                 <div className='w-6/10 flex items-center justify-center max-md:hidden'>
                     <input
                         onChange={(e) => setSearchInput(e.target.value)}
-                        className={`${darkMode ? "text-white bg-[#282A2C] " : "text-[#1f1f1f] bg-[#F0F4F9]"} py-2.75 px-8 md:w-3/4 rounded-lg`}
+                        className={`${darkMode ? "text-white bg-[#282A2C] " : "text-[#1f1f1f] bg-[#F0F4F9]"} py-2.75 px-8 md:w-3/4 rounded-lg focus:bg-white focus:text-[#1f1f1f] focus:placeholder:text-[#1f1f1f] focus:outline-none focus:shadow-[inset_1px_1px_0_rgba(0,0,0,0.25),inset_0_-1px_0_rgba(0,0,0,0.2)]`}
                         type="text"
                         placeholder="Arama Yapın"
                     />
